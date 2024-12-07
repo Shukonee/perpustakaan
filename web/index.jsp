@@ -7,5 +7,6 @@
     <h1>Selamat Datang di Sistem Perpustakaan</h1>
     <p>Silakan login untuk melanjutkan.</p>
     <a href="login.jsp"><button>Login</button></a>
+    <a href="register.jsp"><button>Register</button></a>
 </body>
 </html>

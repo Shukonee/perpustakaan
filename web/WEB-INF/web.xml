@@ -9,6 +9,16 @@
         <servlet-name>loginController</servlet-name>
         <url-pattern>/loginController</url-pattern>
     </servlet-mapping>
+    
+    <!-- Servlet untuk Registrasi -->
+    <servlet>
+        <servlet-name>registerController</servlet-name>
+        <servlet-class>registerController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>registerController</servlet-name>
+        <url-pattern>/registerController</url-pattern>
+    </servlet-mapping>
 </web-app>
 
 
