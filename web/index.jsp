@@ -1,17 +1,11 @@
-<%-- 
-    Document   : index
-    Created on : 7 Dec 2024, 23.25.23
-    Author     : farre
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
+<head>
+    <title>Welcome</title>
+</head>
+<body>
+    <h1>Selamat Datang di Sistem Perpustakaan</h1>
+    <p>Silakan login untuk melanjutkan.</p>
+    <a href="login.jsp"><button>Login</button></a>
+</body>
 </html>
