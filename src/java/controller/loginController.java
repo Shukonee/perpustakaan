@@ -30,7 +30,8 @@ public class loginController extends HttpServlet {
                 int userId = rs.getInt("user_id");
                 HttpSession session = request.getSession();
                 session.setAttribute("userId", userId);
-                response.sendRedirect("welcome.jsp");
+                session.setAttribute("isLoggedIn", true);
+                response.sendRedirect("home.jsp");
             } else {
                 // Login gagal
                 response.sendRedirect("login.jsp?error=1");
