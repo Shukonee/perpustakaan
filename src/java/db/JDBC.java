@@ -21,6 +21,10 @@ public class JDBC {
         }
     }
     
+    public Connection getConnection() {
+        return this.con;  // Mengembalikan koneksi yang sudah ada
+    }
+    
     public void disconnect() {
         try {
             stmt.close();

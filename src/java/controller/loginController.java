@@ -1,5 +1,7 @@
 import java.io.IOException;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,31 +18,57 @@ public class loginController extends HttpServlet {
         String password = request.getParameter("password");
 
         JDBC db = new JDBC();
+
         if (!db.isConnected) {
             response.sendRedirect("login.jsp?error=2"); // Koneksi gagal
             return;
         }
 
         try {
-            String sql = "SELECT user_id FROM account WHERE email = '" + email + "' AND password = SHA2('" + password + "', 256)";
-            ResultSet rs = db.getData(sql);
+            String sql = "SELECT user_id FROM account WHERE email = ? AND password = SHA2(?, 256)";
+            PreparedStatement stmt = db.getConnection().prepareStatement(sql);
+            stmt.setString(1, email);
+            stmt.setString(2, password);
+            ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                // Login berhasil
                 int userId = rs.getInt("user_id");
                 HttpSession session = request.getSession();
                 session.setAttribute("userId", userId);
                 session.setAttribute("isLoggedIn", true);
-                response.sendRedirect("home.jsp");
+
+                // Cek apakah pengguna adalah admin atau member
+                String role = "";  // Role pengguna (admin atau member)
+                
+                // Periksa apakah userId terkait dengan admin
+                sql = "SELECT * FROM admin WHERE account_id_fk = ?";
+                stmt = db.getConnection().prepareStatement(sql);
+                stmt.setInt(1, userId);
+                ResultSet adminResult = stmt.executeQuery();
+                
+                if (adminResult.next()) {
+                    role = "admin"; 
+                } else {
+                    role = "member";
+                }
+
+                session.setAttribute("role", role);
+
+                // Redirect ke halaman sesuai dengan role admin/user
+                if ("admin".equals(role)) {
+                    response.sendRedirect("welcome.jsp"); // jika admin (halamannya hanya percobaan)
+                } else {
+                    response.sendRedirect("home.jsp"); // jika user
+                }
             } else {
                 // Login gagal
-                response.sendRedirect("login.jsp?error=1");
+                response.sendRedirect("login.jsp?error=1"); 
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-            response.sendRedirect("login.jsp?error=2");
+            response.sendRedirect("login.jsp?error=2"); 
         } finally {
-            db.disconnect();
+            db.disconnect(); 
         }
     }
 }

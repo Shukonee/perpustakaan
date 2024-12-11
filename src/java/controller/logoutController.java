@@ -10,15 +10,12 @@ import javax.servlet.http.HttpSession;
 public class logoutController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Ambil session yang ada
         HttpSession session = request.getSession(false);
         
         if (session != null) {
-            // Menghapus session
             session.invalidate();
         }
 
-        // Redirect ke halaman login setelah logout
         response.sendRedirect("index.jsp");
     }
 }

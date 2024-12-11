@@ -20,15 +20,14 @@ public class registerController extends HttpServlet {
 
         // Validasi password
         if (!password.equals(confirmPassword)) {
-            response.sendRedirect("register.jsp?error=2"); // Password tidak cocok
+            response.sendRedirect("register.jsp?error=2"); 
             return;
         }
 
         JDBC db = new JDBC();
 
-        // Cek koneksi DB
         if (!db.isConnected) {
-            response.sendRedirect("register.jsp?error=3");  // Koneksi gagal
+            response.sendRedirect("register.jsp?error=3"); 
             return;
         }
 
@@ -37,13 +36,13 @@ public class registerController extends HttpServlet {
             String checkEmailSql = "SELECT user_id FROM account WHERE email = '" + email + "'";
             ResultSet rs = db.getData(checkEmailSql);
             if (rs.next()) {
-                response.sendRedirect("register.jsp?error=1");  // Email sudah terdaftar
+                response.sendRedirect("register.jsp?error=1"); 
                 return;
             }
 
             // Insert akun baru
             String insertAccountSql = "INSERT INTO account (email, password) VALUES ('" + email + "', SHA2('" + password + "', 256))";
-            db.runQuery(insertAccountSql);  // Menjalankan query INSERT
+            db.runQuery(insertAccountSql);  
 
             // Ambil ID akun yang baru saja dimasukkan
             rs = db.getData("SELECT user_id FROM account WHERE email = '" + email + "'");
@@ -53,14 +52,14 @@ public class registerController extends HttpServlet {
             // Insert data member
             String insertMemberSql = "INSERT INTO member (nama_depan, nama_belakang, tanggal_lahir, account_id_fk) "
                     + "VALUES ('" + namaDepan + "', '" + namaBelakang + "', '" + tanggalLahir + "', " + userId + ")";
-            db.runQuery(insertMemberSql);  // Menjalankan query INSERT member
+            db.runQuery(insertMemberSql);  
 
-            response.sendRedirect("login.jsp");  // Redirect ke halaman login setelah registrasi berhasil
+            response.sendRedirect("login.jsp"); 
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("register.jsp?error=3");  // Terjadi kesalahan saat registrasi
+            response.sendRedirect("register.jsp?error=3");  
         } finally {
-            db.disconnect();  // Pastikan koneksi ditutup setelah eksekusi selesai
+            db.disconnect();  
         }
 
     }
