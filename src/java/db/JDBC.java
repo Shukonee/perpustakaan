@@ -22,7 +22,7 @@ public class JDBC {
     }
     
     public Connection getConnection() {
-        return this.con;  // Mengembalikan koneksi yang sudah ada
+        return this.con; 
     }
     
     public void disconnect() {
@@ -32,6 +32,18 @@ public class JDBC {
             message = "DB disconnected";
         } catch(Exception e) {
             message = e.getMessage();
+        }
+    }
+    
+    public void runUpdate(String query, Object[] params) {
+        try (PreparedStatement pstmt = con.prepareStatement(query)) {
+            for (int i = 0; i < params.length; i++) {
+                pstmt.setObject(i + 1, params[i]);  
+            }
+            int result = pstmt.executeUpdate();
+            message = result + " rows affected";  
+        } catch (SQLException e) {
+            message = "Error: " + e.getMessage(); 
         }
     }
     

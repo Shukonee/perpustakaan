@@ -9,6 +9,9 @@
     <button>
         <a href="home.jsp">Home Page</a>
     </button>
+    <button>
+        <a href="addBook.jsp">Tambah Buku</a>
+    </button>
 
 </body>
 </html>
