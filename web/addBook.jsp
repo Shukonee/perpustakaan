@@ -1,5 +1,17 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%@ page import="java.util.*, db.JDBC, java.sql.ResultSet, java.sql.SQLException" %>
+<%@ page import="java.util.*, db.JDBC, java.sql.ResultSet, java.sql.SQLException" %>\
+<%
+    if (session == null || session.getAttribute("isLoggedIn") == null || !(Boolean) session.getAttribute("isLoggedIn")) {
+        response.sendRedirect("login.jsp?error=notLoggedIn");
+        return;
+    }
+    
+    String role = (String) session.getAttribute("role");
+    if (role == null || !role.equals("admin")) {
+        response.sendRedirect("login.jsp?error=notAuthorized");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>

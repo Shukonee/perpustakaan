@@ -14,7 +14,6 @@ import db.JDBC;
 public class addBookController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Ambil data dari form
         String namaBuku = request.getParameter("namaBuku");
         String tipeBuku = request.getParameter("tipeBuku");
         String jenisBuku = request.getParameter("jenisBuku");
@@ -28,7 +27,6 @@ public class addBookController extends HttpServlet {
             return;
         }
 
-        // Parse rakbukuId menjadi integer
         int rakbukuId = 0;
         try {
             rakbukuId = Integer.parseInt(rakbukuIdStr);
@@ -45,11 +43,10 @@ public class addBookController extends HttpServlet {
             response.sendRedirect("login.jsp?error=notLoggedIn");
             return;
         }
-
-        // Koneksi ke database
+        
         JDBC db = new JDBC();
         if (!db.isConnected) {
-            response.sendRedirect("addBook.jsp?error=2"); // Koneksi gagal
+            response.sendRedirect("addBook.jsp?error=2"); 
             return;
         }
 
@@ -64,13 +61,13 @@ public class addBookController extends HttpServlet {
             stmt.setString(5, author);
             stmt.setInt(6, rakbukuId);
 
-            // Menambahkan log untuk memeriksa data yang dikirimkan
             System.out.println("Executing query: " + sql);
             System.out.println("Parameters: " + namaBuku + ", " + tipeBuku + ", " + jenisBuku + ", " + tglTerbit + ", " + author + ", " + rakbukuId);
 
             int result = stmt.executeUpdate();
             if (result > 0) {
                 // Jika berhasil, redirect ke halaman daftar buku
+                System.out.println("Redirecting to listBookController...");
                 response.sendRedirect("listBookController?success=bookAdded");
             } else {
                 // Jika gagal, redirect kembali ke halaman tambah buku
@@ -80,7 +77,7 @@ public class addBookController extends HttpServlet {
             e.printStackTrace();
             response.sendRedirect("addBook.jsp?error=2");  // Jika terjadi kesalahan dalam query
         } finally {
-            db.disconnect();  // Pastikan koneksi database ditutup
+            db.disconnect(); 
         }
     }
 }
