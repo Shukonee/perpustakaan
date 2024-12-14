@@ -1,3 +1,7 @@
+<% String error = request.getParameter("error"); %>
+<% if ("notAuthorized".equals(error)) { %>
+    <div class="alert alert-danger">Anda tidak memiliki izin untuk mengakses halaman ini.</div>
+<% } %>
 <!DOCTYPE html>
 <html>
 <head>

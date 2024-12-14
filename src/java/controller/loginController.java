@@ -37,10 +37,8 @@ public class loginController extends HttpServlet {
                 session.setAttribute("userId", userId);
                 session.setAttribute("isLoggedIn", true);
 
-                // Cek apakah pengguna adalah admin atau member
-                String role = "";  // Role pengguna (admin atau member)
+                String role; 
                 
-                // Periksa apakah userId terkait dengan admin
                 sql = "SELECT * FROM admin WHERE account_id_fk = ?";
                 stmt = db.getConnection().prepareStatement(sql);
                 stmt.setInt(1, userId);
@@ -54,14 +52,12 @@ public class loginController extends HttpServlet {
 
                 session.setAttribute("role", role);
 
-                // Redirect ke halaman sesuai dengan role admin/user
                 if ("admin".equals(role)) {
-                    response.sendRedirect("welcome.jsp"); // jika admin (halamannya hanya percobaan)
+                    response.sendRedirect("adminDashboard.jsp");
                 } else {
                     response.sendRedirect("home.jsp"); // jika user
                 }
             } else {
-                // Login gagal
                 response.sendRedirect("login.jsp?error=1"); 
             }
         } catch (SQLException e) {
