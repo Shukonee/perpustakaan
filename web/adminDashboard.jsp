@@ -1,17 +1,17 @@
-<%-- 
-    Document   : adminDashboard
-    Created on : 11 Dec 2024, 20.54.22
-    Author     : farre
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Berhasil Menambah Buku</h1>
-    </body>
+<head>
+    <title>Welcome</title>
+</head>
+<body>
+    <h1>Welcome!</h1>
+    <p>You have successfully logged in as admin!</p>
+    <button>
+        <a href="home.jsp">Home Page</a>
+    </button>
+    <button>
+        <a href="addBook.jsp">Tambah Buku</a>
+    </button>
+
+</body>
 </html>
