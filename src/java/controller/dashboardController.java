@@ -33,7 +33,7 @@ public class dashboardController extends HttpServlet {
         if (db.isConnected) {
             try {
                 String sql = "SELECT * from rakbuku";
-
+                //Test COmmit AHyphaG
                 ResultSet rs = db.getData(sql);
 
                 while (rs.next()) {
