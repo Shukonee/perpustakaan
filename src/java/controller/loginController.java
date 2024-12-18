@@ -1,3 +1,5 @@
+package controller;
+
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -53,7 +55,7 @@ public class loginController extends HttpServlet {
                 session.setAttribute("role", role);
 
                 if ("admin".equals(role)) {
-                    response.sendRedirect("adminDashboard.jsp");
+                    response.sendRedirect("dashboard");
                 } else {
                     response.sendRedirect("home.jsp"); // jika user
                 }

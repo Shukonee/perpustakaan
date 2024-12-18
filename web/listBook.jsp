@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%@ page import="java.util.List, model.Buku, db.JDBC" %>
+<%@ page import="java.util.ArrayList,java.sql.ResultSet, model.Buku, db.JDBC" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,8 +23,26 @@
                 </thead>
                 <tbody>
                     <%
-                        // Mendapatkan daftar buku dari request attribute
-                        List<Buku> listBuku = (List<Buku>) request.getAttribute("listBuku");
+                        JDBC db = new JDBC();
+                        ArrayList<Buku> listBuku = new ArrayList<>();
+                        String sql = "SELECT * from buku";
+
+                        ResultSet rs = db.getData(sql);
+
+                        while (rs.next()) {
+                            Buku buku = new Buku(
+                                rs.getInt("buku_id"),
+                                rs.getString("nama_buku"),
+                                rs.getString("tipe_buku"),
+                                rs.getString("jenis_buku"),
+                                rs.getString("tgl_terbit"),
+                                rs.getString("author"),
+                                rs.getInt("rakbuku_id_fk")
+                            );
+                            listBuku.add(buku);
+                        }
+                        rs.close();
+                        db.disconnect();
                         if (listBuku == null || listBuku.isEmpty()) {
                     %>
                             <tr>

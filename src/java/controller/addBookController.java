@@ -1,5 +1,6 @@
+package controller;
+
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import db.JDBC;
 
 @WebServlet("/addBookController")
 public class addBookController extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String namaBuku = request.getParameter("namaBuku");
@@ -68,7 +70,7 @@ public class addBookController extends HttpServlet {
             if (result > 0) {
                 // Jika berhasil, redirect ke halaman daftar buku
                 System.out.println("Redirecting to listBookController...");
-                response.sendRedirect("listBookController?success=bookAdded");
+                response.sendRedirect("dashboard");
             } else {
                 // Jika gagal, redirect kembali ke halaman tambah buku
                 response.sendRedirect("addBook.jsp?error=1");
