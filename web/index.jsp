@@ -1,19 +1,46 @@
 <% String error = request.getParameter("error"); %>
 <% if ("notAuthorized".equals(error)) { %>
-    <div class="alert alert-danger">Anda tidak memiliki izin untuk mengakses halaman ini.</div>
+    <div class="alert alert-danger text-center mt-3">Anda tidak memiliki izin untuk mengakses halaman ini.</div>
 <% } %>
+
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+            margin-top: 100px;
+            text-align: center;
+        }
+        h1 {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        .btn {
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .alert {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Selamat Datang diPerpustakaan Jaya Abadi</h1>
-    <p>Silakan login untuk melanjutkan.</p>
-    <a href="login.jsp"><button>Masuk</button></a>
-    <a href="register.jsp"><button>Daftar</button></a>
+    <div class="container">
+        <h1>Selamat Datang di Perpustakaan Jaya Abadi</h1>
+        <p>Silakan login untuk melanjutkan.</p>
+
+        <a href="login.jsp"><button class="btn btn-primary w-100">Masuk</button></a>
+        <a href="register.jsp"><button class="btn btn-warning w-100 mt-3">Daftar</button></a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
