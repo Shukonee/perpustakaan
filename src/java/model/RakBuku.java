@@ -10,7 +10,8 @@ package model;
  */
 public class RakBuku {
     private int rakbuku_id;
-    private String jenis_rak, lokasi_rak;
+    private String jenis_rak;
+    private String lokasi_rak;
     
     public RakBuku(int rakbuku_id, String jenis_rak, String lokasi_rak){
         this.rakbuku_id = rakbuku_id;
