@@ -42,9 +42,9 @@
         .btn {
             border-radius: 5px;
         }
-        .table th, .table td {
+/*        .table th, .table td {
             border-radius: 10px;
-        }
+        }*/
         .table-dark {
             background-color: #343a40;
         }
@@ -103,7 +103,9 @@
                         <td><%= buku.getJenisRak() %></td>
                         <td>
                             <a href="editBook.jsp?bukuId=<%= buku.getBukuId() %>" class="btn btn-warning btn-sm">Edit</a>
-                            <a href="deleteBookController?bukuId=<%= buku.getBukuId() %>" class="btn btn-danger btn-sm">Hapus</a>
+                            <a href="deleteBook?bukuId=<%= buku.getBukuId() %>" 
+                               onclick="return confirm('Apakah Anda yakin ingin menghapus buku ini?')" 
+                               class="btn btn-danger btn-sm">Hapus</a>
                         </td>
                     </tr>
                     <%
@@ -145,7 +147,10 @@
                         <td><%= rak.getLokasi_rak() %></td>
                         <td>
                             <a href="editRak.jsp?rakId=<%= rak.getRakbuku_id() %>" class="btn btn-warning btn-sm">Edit</a>
-                            <a href="deleteRakController?rakId=<%= rak.getRakbuku_id() %>" class="btn btn-danger btn-sm">Hapus</a>
+                            <a href="deleteRak?rakId=<%= rak.getRakbuku_id() %>" 
+                               onclick="return confirm('Apakah Anda yakin ingin menghapus rak ini? \n\
+                                Buku pada rak ini akan terhapus otomatis jika anda menghapus rak ini.')" 
+                               class="btn btn-danger btn-sm">Hapus</a>
                         </td>
                     </tr>
                     <%

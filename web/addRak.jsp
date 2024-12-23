@@ -24,7 +24,7 @@
             background-color: #f8f9fa;
         }
         .container {
-            max-width: 600px; /* Limit the container's width */
+            max-width: 600px;
             margin-top: 50px;
         }
         .form-control {

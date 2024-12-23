@@ -11,7 +11,7 @@
         }
         .container {
             max-width: 500px;
-            margin-top: 100px;
+            margin-top: 50px;
         }
         .card {
             border-radius: 10px;

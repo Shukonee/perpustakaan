@@ -14,7 +14,7 @@
         .container {
             max-width: 800px;
             margin-top: 50px;
-            padding-top: 80px; /* Added padding to push content down */
+            padding-top: 80px; 
         }
         h1 {
             color: #007bff;

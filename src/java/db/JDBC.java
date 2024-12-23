@@ -9,9 +9,9 @@ public class JDBC {
     
     public JDBC() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");  // Pastikan driver JDBC sudah benar
+            Class.forName("com.mysql.cj.jdbc.Driver");  
             con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/perpus_pbo_2024","root","admin");  // Sesuaikan dengan kredensial database Anda
+                "jdbc:mysql://localhost:3306/perpus_pbo_2024","root","");  
             stmt = con.createStatement();
             isConnected = true;
             message = "DB connected";
@@ -49,17 +49,17 @@ public class JDBC {
     
     public void runQuery(String query) {
         try {
-            int result = stmt.executeUpdate(query);  // Menjalankan perintah SQL
-            message = result + " rows affected";  // Menyimpan pesan hasil eksekusi
+            int result = stmt.executeUpdate(query);  
+            message = result + " rows affected";  
         } catch (SQLException e) {
-            message = "Error: " + e.getMessage();  // Menangani error
+            message = "Error: " + e.getMessage(); 
         }
     }
     
     public ResultSet getData(String query) {
         ResultSet rs = null;
         try {
-            rs = stmt.executeQuery(query);  // Menjalankan perintah SQL yang mengembalikan hasil (SELECT)
+            rs = stmt.executeQuery(query);  
         } catch (SQLException e) {
             message = e.getMessage();
         }
