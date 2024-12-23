@@ -23,7 +23,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/mysql-connector-java-8.0.27.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../../../../Java-Library/javax.servlet-api-4.0.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -32,7 +32,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../../../../Java-Library/javax.servlet-api-4.0.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../../../../Java-Library/mysql-connector-java-8.0.27.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
