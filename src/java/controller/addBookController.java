@@ -25,7 +25,7 @@ public class addBookController extends HttpServlet {
 
         // Cek apakah rak buku terpilih
         if (rakbukuIdStr == null || rakbukuIdStr.isEmpty()) {
-            response.sendRedirect("addBook.jsp?error=rakbukuEmpty");  // Rak buku harus dipilih
+            response.sendRedirect("admin/addBook.jsp?error=rakbukuEmpty"); 
             return;
         }
 
@@ -33,7 +33,7 @@ public class addBookController extends HttpServlet {
         try {
             rakbukuId = Integer.parseInt(rakbukuIdStr);
         } catch (NumberFormatException e) {
-            response.sendRedirect("addBook.jsp?error=invalidRakbukuId");  // Jika parsing gagal
+            response.sendRedirect("admin/addBook.jsp?error=invalidRakbukuId"); 
             return;
         }
 
@@ -48,7 +48,7 @@ public class addBookController extends HttpServlet {
         
         JDBC db = new JDBC();
         if (!db.isConnected) {
-            response.sendRedirect("addBook.jsp?error=2"); 
+            response.sendRedirect("admin/addBook.jsp?error=2"); 
             return;
         }
 
@@ -68,16 +68,14 @@ public class addBookController extends HttpServlet {
 
             int result = stmt.executeUpdate();
             if (result > 0) {
-                // Jika berhasil, redirect ke halaman daftar buku
                 System.out.println("Redirecting to listBookController...");
                 response.sendRedirect("dashboard");
             } else {
-                // Jika gagal, redirect kembali ke halaman tambah buku
-                response.sendRedirect("addBook.jsp?error=1");
+                response.sendRedirect("admin/addBook.jsp?error=1");
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            response.sendRedirect("addBook.jsp?error=2");  // Jika terjadi kesalahan dalam query
+            response.sendRedirect("admin/addBook.jsp?error=2"); 
         } finally {
             db.disconnect(); 
         }

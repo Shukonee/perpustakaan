@@ -2,13 +2,16 @@
 <%@ page import="java.util.*, db.JDBC, java.sql.ResultSet, java.sql.SQLException" %>
 <%
     if (session == null || session.getAttribute("isLoggedIn") == null || !(Boolean) session.getAttribute("isLoggedIn")) {
-        response.sendRedirect("login.jsp?error=notLoggedIn");
+        response.sendRedirect("/perpustakaan/login.jsp?error=notLoggedIn");
         return;
     }
     
     String role = (String) session.getAttribute("role");
     if (role == null || !role.equals("admin")) {
-        response.sendRedirect("login.jsp?error=notAuthorized");
+        response.sendRedirect("/perpustakaan/index.jsp?error=notAuthorized");
+        return;
+    } else if (role.equals("user")) {
+        response.sendRedirect("/perpustakaan/home.jsp?error=notAuthorized");
         return;
     }
 %>
@@ -64,7 +67,7 @@
     <div class="container">
         <div class="card p-4 shadow-sm rounded">
             <h3>Tambah Buku Baru</h3>
-            <form action="addBookController" method="post">
+            <form action="/perpustakaan/addBookController" method="post">
                 <div class="form-group">
                     <label for="namaBuku">Nama Buku</label>
                     <input type="text" name="namaBuku" id="namaBuku" class="form-control" required placeholder="Masukkan nama buku">
@@ -113,7 +116,7 @@
                 </div>
                 <div class="button-group">
                     <button type="submit" class="btn btn-primary w-48">Tambah Buku</button>
-                    <a href="dashboard" class="btn btn-secondary w-48">Kembali</a>
+                    <a href="/perpustakaan/dashboard" class="btn btn-secondary w-48">Kembali</a>
                 </div>
             </form>
         </div>

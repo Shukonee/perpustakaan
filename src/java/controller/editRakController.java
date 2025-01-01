@@ -59,7 +59,7 @@ public class editRakController extends HttpServlet {
         if (success) {
             response.sendRedirect("dashboard?success=rakUpdated");
         } else {
-            response.sendRedirect("editRak.jsp?rakId=" + rakId + "&error=updateFailed");
+            response.sendRedirect("perpustakaan/admin/editRak.jsp?rakId=" + rakId + "&error=updateFailed");
         }
     }
 }

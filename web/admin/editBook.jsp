@@ -1,6 +1,21 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ page import="java.sql.*" %>
 <%@ page import="db.JDBC" %>
+<%
+    if (session == null || session.getAttribute("isLoggedIn") == null || !(Boolean) session.getAttribute("isLoggedIn")) {
+        response.sendRedirect("/perpustakaan/login.jsp?error=notLoggedIn");
+        return;
+    }
+    
+    String role = (String) session.getAttribute("role");
+    if (role == null || !role.equals("admin")) {
+        response.sendRedirect("/perpustakaan/index.jsp?error=notAuthorized");
+        return;
+    } else if (role.equals("user")) {
+        response.sendRedirect("/perpustakaan/home.jsp?error=notAuthorized");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -76,7 +91,7 @@
                         // Get rak data
                         rakResultSet = db.getData("SELECT * FROM rakbuku");
             %>
-            <form action="editBook" method="POST">
+            <form action="/perpustakaan/editBook" method="POST">
                 <input type="hidden" name="bukuId" value="<%= bukuId %>">
 
                 <div class="form-group">
@@ -129,7 +144,7 @@
 
                 <div class="button-group">
                     <button type="submit" class="btn btn-primary w-48">Perbarui Buku</button>
-                    <a href="dashboard" class="btn btn-secondary w-48">Kembali</a>
+                    <a href="/perpustakaan/dashboard" class="btn btn-secondary w-48">Kembali</a>
                 </div>
             </form>
             <%

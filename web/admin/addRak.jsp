@@ -2,13 +2,16 @@
 <%@ page import="java.util.*, db.JDBC, java.sql.ResultSet, java.sql.SQLException" %>
 <%
     if (session == null || session.getAttribute("isLoggedIn") == null || !(Boolean) session.getAttribute("isLoggedIn")) {
-        response.sendRedirect("login.jsp?error=notLoggedIn");
+        response.sendRedirect("/perpustakaan/login.jsp?error=notLoggedIn");
         return;
     }
     
     String role = (String) session.getAttribute("role");
     if (role == null || !role.equals("admin")) {
-        response.sendRedirect("login.jsp?error=notAuthorized");
+        response.sendRedirect("/perpustakaan/index.jsp?error=notAuthorized");
+        return;
+    } else if (role.equals("user")) {
+        response.sendRedirect("/perpustakaan/home.jsp?error=notAuthorized");
         return;
     }
 %>
@@ -57,7 +60,7 @@
     <div class="container">
         <div class="card p-4 shadow-sm rounded">
             <h3>Tambah Rak Buku Baru</h3>
-            <form action="addRak" method="post">
+            <form action="/perpustakaan/addRak" method="post">
                 <div class="form-group">
                     <label for="jenisRak">Jenis Rak</label>
                     <input type="text" name="input-jenis_rak" id="jenisRak" class="form-control" required placeholder="Masukkan jenis rak">
@@ -68,7 +71,7 @@
                 </div>
                 <div class="button-group">
                     <button type="submit" class="btn btn-primary w-48">Tambah Rak</button>
-                    <a href="dashboard" class="btn btn-secondary w-48">Kembali</a>
+                    <a href="/perpustakaan/dashboard" class="btn btn-secondary w-48">Kembali</a>
                 </div>
             </form>
         </div>

@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/editBook")
 public class editBookController extends HttpServlet {
-    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
@@ -70,7 +69,7 @@ public class editBookController extends HttpServlet {
         if (success) {
             response.sendRedirect("dashboard?success=bookUpdated");
         } else {
-            response.sendRedirect("editBook.jsp?bukuId=" + bukuId + "&error=updateFailed");
+            response.sendRedirect("admin/editBook.jsp?bukuId=" + bukuId + "&error=updateFailed");
         }
     }
 }

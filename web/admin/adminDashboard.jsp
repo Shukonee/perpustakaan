@@ -2,16 +2,16 @@
 <%@ page import="java.util.List, model.Buku, model.RakBuku" %>
 <%
     if (session == null || session.getAttribute("isLoggedIn") == null || !(Boolean) session.getAttribute("isLoggedIn")) {
-        response.sendRedirect("login.jsp?error=notLoggedIn");
+        response.sendRedirect("/perpustakaan/login.jsp?error=notLoggedIn");
         return;
     }
     
     String role = (String) session.getAttribute("role");
     if (role == null || !role.equals("admin")) {
-        response.sendRedirect("index.jsp?error=notAuthorized");
+        response.sendRedirect("/perpustakaan/index.jsp?error=notAuthorized");
         return;
     } else if (role.equals("user")) {
-        response.sendRedirect("home.jsp?error=notAuthorized");
+        response.sendRedirect("/perpustakaan/home.jsp?error=notAuthorized");
         return;
     }
 %>
@@ -72,7 +72,12 @@
         
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h3 class="text-secondary">Daftar Buku</h3>
-            <a href="addBook.jsp" class="btn btn-primary">Tambah Buku</a>
+            <form action="dashboard" method="get" class="d-flex mb-4 w-50">
+                <input type="text" name="search" class="form-control me-2" 
+                       placeholder="Cari buku berdasarkan nama, tipe, jenis, atau author..." value="${param.search}">
+                <button type="submit" class="btn btn-primary">Cari</button>
+            </form>
+            <a href="admin/addBook.jsp" class="btn btn-primary">Tambah Buku</a>
         </div>
 
         <div class="card mb-4">
@@ -102,7 +107,7 @@
                         <td><%= buku.getAuthor() %></td>
                         <td><%= buku.getJenisRak() %></td>
                         <td>
-                            <a href="editBook.jsp?bukuId=<%= buku.getBukuId() %>" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="admin/editBook.jsp?bukuId=<%= buku.getBukuId() %>" class="btn btn-warning btn-sm">Edit</a>
                             <a href="deleteBook?bukuId=<%= buku.getBukuId() %>" 
                                onclick="return confirm('Apakah Anda yakin ingin menghapus buku ini?')" 
                                class="btn btn-danger btn-sm">Hapus</a>
@@ -122,7 +127,7 @@
 
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h3 class="text-secondary">Daftar Rak Buku</h3>
-            <a href="addRak.jsp" class="btn btn-primary">Tambah Rak Buku</a>
+            <a href="admin/addRak.jsp" class="btn btn-primary">Tambah Rak Buku</a>
         </div>
 
         <div class="card mb-4">
@@ -146,7 +151,7 @@
                         <td><%= rak.getJenis_rak() %></td>
                         <td><%= rak.getLokasi_rak() %></td>
                         <td>
-                            <a href="editRak.jsp?rakId=<%= rak.getRakbuku_id() %>" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="admin/editRak.jsp?rakId=<%= rak.getRakbuku_id() %>" class="btn btn-warning btn-sm">Edit</a>
                             <a href="deleteRak?rakId=<%= rak.getRakbuku_id() %>" 
                                onclick="return confirm('Apakah Anda yakin ingin menghapus rak ini? \n\
                                 Buku pada rak ini akan terhapus otomatis jika anda menghapus rak ini.')" 

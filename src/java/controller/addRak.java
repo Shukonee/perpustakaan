@@ -23,7 +23,7 @@ public class addRak extends HttpServlet {
     @Override
     protected void doGet (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
-        response.sendRedirect("addRak.jsp");
+        response.sendRedirect("admin/addRak.jsp");
     }
     @Override
     protected void doPost (HttpServletRequest request, HttpServletResponse response)

@@ -65,4 +65,8 @@ public class JDBC {
         }
         return rs;
     }
+    
+    public PreparedStatement getPreparedStatement(String query) throws SQLException {
+        return con.prepareStatement(query);
+    }
 }
