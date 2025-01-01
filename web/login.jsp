@@ -48,8 +48,8 @@
                     <button type="submit" class="btn btn-primary w-100">Login</button>
                 </form>
                 <div class="text-center">
-                    <p class="card-text mb-2">Belum mempunyai akun?</p>
-                    <a href="register.jsp" class="btn btn-warning w-100">Daftar</a>
+                    <p class="card-text mb-2 mt-4">Haven't registered yet?</p>
+                    <a href="register.jsp" class="btn btn-warning w-100">Register</a>
                 </div>
             </div>
         </div>

@@ -107,6 +107,7 @@
                         <th>Tanggal Terbit</th>
                         <th>Author</th>
                         <th>Jenis Rak</th>
+                        <th>Status Buku</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -122,6 +123,9 @@
                         <td><%= book.getTglTerbit() %></td>
                         <td><%= book.getAuthor() %></td>
                         <td><%= book.getJenisRak() %></td>
+                        <td>
+                            <%= book.getStatusBuku() ? "Tidak Tersedia" : "Tersedia" %>
+                        </td>
                     </tr>
                     <% 
                             }

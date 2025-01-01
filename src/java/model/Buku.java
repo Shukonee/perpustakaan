@@ -12,8 +12,9 @@ public class Buku {
     private String tglTerbit;
     private String author;
     private int rakbuku;
+    private boolean statusBuku;
 
-    public Buku(int bukuId, String namaBuku, String tipeBuku, String jenisBuku, String tglTerbit, String author, int rakbuku) {
+    public Buku(int bukuId, String namaBuku, String tipeBuku, String jenisBuku, String tglTerbit, String author, int rakbuku, boolean statusBuku) {
         this.bukuId = bukuId;
         this.namaBuku = namaBuku;
         this.tipeBuku = tipeBuku;
@@ -21,6 +22,7 @@ public class Buku {
         this.tglTerbit = tglTerbit;
         this.author = author;
         this.rakbuku = rakbuku;
+        this.statusBuku = statusBuku;
     }
 
     // Getter dan Setter untuk semua atribut
@@ -46,6 +48,10 @@ public class Buku {
 
     public String getAuthor() {
         return author;
+    }
+    
+    public boolean getStatusBuku() {
+        return statusBuku;
     }
 
     public String getJenisRak() {

@@ -72,7 +72,8 @@ public class dashboardController extends HttpServlet {
                         rs.getString("jenis_buku"),
                         rs.getString("tgl_terbit"),
                         rs.getString("author"),
-                        rs.getInt("rakbuku_id_fk")
+                        rs.getInt("rakbuku_id_fk"),
+                        rs.getBoolean("status_booking")
                     );
                     listBuku.add(buku);
                 }

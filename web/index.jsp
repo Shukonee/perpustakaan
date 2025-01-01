@@ -37,8 +37,8 @@
         <h1>Selamat Datang di Perpustakaan Jaya Abadi</h1>
         <p>Silakan login untuk melanjutkan.</p>
 
-        <a href="login.jsp"><button class="btn btn-primary w-100">Masuk</button></a>
-        <a href="register.jsp"><button class="btn btn-warning w-100 mt-3">Daftar</button></a>
+        <a href="login.jsp"><button class="btn btn-primary w-100">Login</button></a>
+        <a href="register.jsp"><button class="btn btn-warning w-100 mt-3">Register</button></a>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>

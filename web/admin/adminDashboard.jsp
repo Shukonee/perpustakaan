@@ -90,6 +90,7 @@
                         <th>Tanggal Terbit</th>
                         <th>Author</th>
                         <th>Rak Buku</th>
+                        <th>Status Buku</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -106,6 +107,9 @@
                         <td><%= buku.getTglTerbit() %></td>
                         <td><%= buku.getAuthor() %></td>
                         <td><%= buku.getJenisRak() %></td>
+                        <td>
+                            <%= buku.getStatusBuku() ? "Tidak Tersedia" : "Tersedia" %>
+                        </td>
                         <td>
                             <a href="admin/editBook.jsp?bukuId=<%= buku.getBukuId() %>" class="btn btn-warning btn-sm">Edit</a>
                             <a href="deleteBook?bukuId=<%= buku.getBukuId() %>" 
