@@ -8,74 +8,136 @@
 %>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar Buku</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .search-box {
-            margin-top: 20px;
+        body {
+            background-color: #f8f9fa;
         }
-        .table {
-            border-collapse: collapse;
-            width: 100%;
+        .container {
+            max-width: 1200px;
+            margin-top: 50px;
         }
-        .table th, .table td {
-            border: 1px solid black;
-            padding: 10px;
-            text-align: left;
+        .card {
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h3 {
+            color: #007bff;
+        }
+        .btn {
+            border-radius: 5px;
+        }
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f9f9f9;
+        }
+        .table-bordered {
+            border: 1px solid #dee2e6;
+        }
+        .table td, .table th {
+            padding: 15px;
         }
     </style>
 </head>
 <body>
-    <h1>Daftar Buku</h1>
-    
-    <!-- Search Box -->
-    <div class="search-box">
-        <form action="listBook.jsp" method="get">
-            <input type="text" name="search" placeholder="Cari buku..." value="<%= search != null ? search : "" %>" />
-            <button type="submit">Cari</button>
-        </form>
+<!--Start Header-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="home.jsp">Perpustakaan</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">Beranda</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="listBooks">Daftar Buku</a>
+                </li>
+<!--                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  </ul>
+                </li>-->
+              </ul>
+              <form class="d-flex p-1">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+              </form>
+              <div class="btn-group">
+                <a href="logoutController" class="btn btn-outline-danger">Logout</a>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <!--End Header-->
+    <div class="container">
+        <div class="text-center mb-4">
+            <h1>Daftar Buku</h1>
+            <p class="lead text-secondary">Kelola daftar buku perpustakaan</p>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <form action="listBook.jsp" method="get" class="d-flex w-50">
+                <input type="text" name="search" class="form-control me-2" placeholder="Cari buku berdasarkan nama, tipe, jenis, atau author..." value="<%= search != null ? search : "" %>">
+                <button type="submit" class="btn btn-primary">Cari</button>
+            </form>
+        </div>
+
+        <div class="card mb-4">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nama Buku</th>
+                        <th>Tipe Buku</th>
+                        <th>Jenis Buku</th>
+                        <th>Tanggal Terbit</th>
+                        <th>Author</th>
+                        <th>Jenis Rak</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% 
+                        if (books != null && !books.isEmpty()) {
+                            for (Buku book : books) { 
+                    %>
+                    <tr>
+                        <td><%= book.getBukuId() %></td>
+                        <td><%= book.getNamaBuku() %></td>
+                        <td><%= book.getTipeBuku() %></td>
+                        <td><%= book.getJenisBuku() %></td>
+                        <td><%= book.getTglTerbit() %></td>
+                        <td><%= book.getAuthor() %></td>
+                        <td><%= book.getJenisRak() %></td>
+                    </tr>
+                    <% 
+                            }
+                        } else { 
+                    %>
+                    <tr>
+                        <td colspan="7" class="text-center">Tidak ada buku ditemukan.</td>
+                    </tr>
+                    <% 
+                        } 
+                    %>
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <!-- Table Displaying Book List -->
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nama Buku</th>
-                <th>Tipe Buku</th>
-                <th>Jenis Buku</th>
-                <th>Tanggal Terbit</th>
-                <th>Author</th>
-                <th>Jenis Rak</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% 
-                if (books != null && !books.isEmpty()) {
-                    for (Buku book : books) { 
-            %>
-            <tr>
-                <td><%= book.getBukuId() %></td>
-                <td><%= book.getNamaBuku() %></td>
-                <td><%= book.getTipeBuku() %></td>
-                <td><%= book.getJenisBuku() %></td>
-                <td><%= book.getTglTerbit() %></td>
-                <td><%= book.getAuthor() %></td>
-                <td><%= book.getJenisRak() %></td>
-            </tr>
-            <% 
-                    }
-                } else { 
-            %>
-            <tr>
-                <td colspan="7">Tidak ada buku ditemukan.</td>
-            </tr>
-            <% 
-                } 
-            %>
-        </tbody>
-    </table>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
