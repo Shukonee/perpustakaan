@@ -19,6 +19,8 @@ nbactions.xml
 nb-configuration.xml
 /nbbuild/
 /nbdist/
+/nbproject/private/               # Ignore user-specific configurations
+nbproject/genfiles.properties     # Ignore auto-generated files
 
 # OS generated files
 .DS_Store
@@ -28,13 +30,3 @@ nb-configuration.xml
 .Trashes
 ehthumbs.db
 Thumbs.db
-nbproject/genfiles.properties
-nbproject/build-impl.xml
-nbproject/build-impl.xml
-nbproject/genfiles.properties
-nbproject/project.xml
-nbproject/project.properties
-nbproject/private/private.xml
-nbproject/private/private.properties
-nbproject/genfiles.properties
-nbproject/build-impl.xml
