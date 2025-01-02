@@ -49,7 +49,7 @@
                 </form>
                 <div class="text-center">
                     <p class="card-text mb-2 mt-4">Haven't registered yet?</p>
-                    <a href="register.jsp" class="btn btn-warning w-100">Register</a>
+                    <a href="register" class="btn btn-warning w-100">Register</a>
                 </div>
             </div>
         </div>

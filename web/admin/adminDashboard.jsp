@@ -65,7 +65,7 @@
             <h1>Admin Dashboard</h1>
             <p class="lead text-secondary">Kelola Buku dan Rak Buku Perpustakaan</p>
             <div class="buttonn-group">
-                <a href="home.jsp" class="btn btn-primary">Beranda</a>
+                <a href="home" class="btn btn-primary">Beranda</a>
                 <a href="logoutController" class="btn btn-danger">Keluar</a>
             </div>
         </div>
