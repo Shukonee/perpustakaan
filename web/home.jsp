@@ -1,6 +1,7 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ page import="model.Buku" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.io.File" %>
 <%
     // Ambil daftar buku dari atribut request
     List<Buku> books = (List<Buku>) request.getAttribute("books");
@@ -69,19 +70,40 @@
                 <% for (Buku book : books) { %>
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="assets/book<%= book.getBukuId() %>.jpg" alt="Cover Buku" class="card-img-top book-cover">
+                        <%
+                            String bookId = String.valueOf(book.getbuku_id());
+                            String filePathJpg = "assets/book" + bookId + ".jpg";
+                            String filePathJpeg = "assets/book" + bookId + ".jpeg";
+                            String filePathPng = "assets/book" + bookId + ".png";
+
+                            File fileJpg = new File(application.getRealPath("/") + filePathJpg);
+                            File fileJpeg = new File(application.getRealPath("/") + filePathJpeg);
+                            File filePng = new File(application.getRealPath("/") + filePathPng);
+
+                            String fileToUse;
+                            if (fileJpg.exists()) {
+                                fileToUse = filePathJpg;
+                            } else if (fileJpeg.exists()) {
+                                fileToUse = filePathJpeg;
+                            } else if (filePng.exists()){
+                                fileToUse = filePathPng;
+                            }else {
+                                fileToUse = "assets/default.jpg"; // Fallback jika file tidak ditemukan
+                            }
+                        %>
+                        <img src="<%= fileToUse %>" alt="Cover Buku" class="card-img-top book-cover">
                         <div class="card-body">
-                            <h5 class="card-title"><%= book.getNamaBuku() %></h5>
+                            <h5 class="card-title"><%= book.getnama_buku() %></h5>
                             <h6 class="card-subtitle mb-2 text-muted">Penulis: <%= book.getAuthor() %></h6>
                             <p class="card-text">
-                                <strong>Jenis:</strong> <%= book.getJenisBuku() %><br>
-                                <strong>Tipe:</strong> <%= book.getTipeBuku() %><br>
-                                <strong>Tanggal Terbit:</strong> <%= book.getTglTerbit() %><br>
+                                <strong>Jenis:</strong> <%= book.getjenis_buku() %><br>
+                                <strong>Tipe:</strong> <%= book.gettipe_buku() %><br>
+                                <strong>Tanggal Terbit:</strong> <%= book.gettgl_terbit() %><br>
                                 <strong>Rak:</strong> <%= book.getJenisRak()%><br>
-                                <strong>Status:</strong> <%= book.getStatusBuku() ? "Tidak Tersedia" : "Tersedia" %>
+                                <strong>Status:</strong> <%= book.getstatus_booking() ? "Tidak Tersedia" : "Tersedia" %>
                             </p>
-                            <% if (!book.getStatusBuku()) { %>
-                                <a href="booking.jsp?bukuId=<%= book.getBukuId() %>" class="btn btn-primary">Booking</a>
+                            <% if (!book.getstatus_booking()) { %>
+                                <a href="${pageContext.request.contextPath}/Booking?buku_id=<%= book.getbuku_id() %>" class="btn btn-primary" method = "get">Booking</a>
                             <% } else { %>
                                 <button class="btn btn-secondary" disabled>Tidak Tersedia</button>
                             <% } %>

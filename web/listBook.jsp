@@ -104,15 +104,20 @@
                             for (Buku book : books) { 
                     %>
                     <tr>
-                        <td><%= book.getBukuId() %></td>
-                        <td><%= book.getNamaBuku() %></td>
-                        <td><%= book.getTipeBuku() %></td>
-                        <td><%= book.getJenisBuku() %></td>
-                        <td><%= book.getTglTerbit() %></td>
+                        <td><%= book.getbuku_id() %></td>
+                        <td><%= book.getnama_buku() %></td>
+                        <td><%= book.gettipe_buku() %></td>
+                        <td><%= book.getjenis_buku() %></td>
+                        <td><%= book.gettgl_terbit() %></td>
                         <td><%= book.getAuthor() %></td>
                         <td><%= book.getJenisRak() %></td>
                         <td>
-                            <%= book.getStatusBuku() ? "Tidak Tersedia" : "Tersedia" %>
+                            <%--<%= book.getstatus_booking() ? "Tidak Tersedia" : "Tersedia" %>--%>
+                            <% if (book.getstatus_booking()) { %>
+                            <p>Tidak Tersedia</p>
+                            <% }else{ %>
+                            <button class = "btn btn-secondary" href = "">Booking</button>
+                            <% } %>
                         </td>
                     </tr>
                     <% 

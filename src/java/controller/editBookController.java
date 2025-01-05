@@ -23,16 +23,16 @@ public class editBookController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
-        String bukuId = request.getParameter("bukuId");
-        String namaBuku = request.getParameter("nama_buku");
-        String tipeBuku = request.getParameter("tipe_buku");
-        String jenisBuku = request.getParameter("jenis_buku");
-        String tglTerbit = request.getParameter("tgl_terbit");
+        String buku_id = request.getParameter("buku_id");
+        String nama_buku = request.getParameter("nama_buku");
+        String tipe_buku = request.getParameter("tipe_buku");
+        String jenis_buku = request.getParameter("jenis_buku");
+        String tgl_terbit = request.getParameter("tgl_terbit");
         String author = request.getParameter("author");
-        String rakbukuId = request.getParameter("rakbuku_id");
+        String rakbuku_id_fk = request.getParameter("rakbuku_id_fk");
         
-        if (bukuId == null || namaBuku == null || tipeBuku == null || 
-            jenisBuku == null || tglTerbit == null || author == null || rakbukuId == null) {
+        if (buku_id == null || nama_buku == null || tipe_buku == null || 
+            jenis_buku == null || tgl_terbit == null || author == null || rakbuku_id_fk == null) {
             response.sendRedirect("dashboard?error=missingFields");
             return;
         }
@@ -46,13 +46,13 @@ public class editBookController extends HttpServlet {
                              "tgl_terbit=?, author=?, rakbuku_id_fk=? WHERE buku_id=?";
                              
                 PreparedStatement pstmt = db.getConnection().prepareStatement(query);
-                pstmt.setString(1, namaBuku);
-                pstmt.setString(2, tipeBuku);
-                pstmt.setString(3, jenisBuku);
-                pstmt.setString(4, tglTerbit);
+                pstmt.setString(1, nama_buku);
+                pstmt.setString(2, tipe_buku);
+                pstmt.setString(3, jenis_buku);
+                pstmt.setString(4, tgl_terbit);
                 pstmt.setString(5, author);
-                pstmt.setInt(6, Integer.parseInt(rakbukuId));
-                pstmt.setInt(7, Integer.parseInt(bukuId));
+                pstmt.setInt(6, Integer.parseInt(rakbuku_id_fk));
+                pstmt.setInt(7, Integer.parseInt(buku_id));
                 
                 int rowsUpdated = pstmt.executeUpdate();
                 success = (rowsUpdated > 0);
@@ -69,7 +69,7 @@ public class editBookController extends HttpServlet {
         if (success) {
             response.sendRedirect("dashboard?success=bookUpdated");
         } else {
-            response.sendRedirect("admin/editBook.jsp?bukuId=" + bukuId + "&error=updateFailed");
+            response.sendRedirect("admin/editBook.jsp?buku_id=" + buku_id + "&error=updateFailed");
         }
     }
 }

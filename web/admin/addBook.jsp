@@ -67,33 +67,33 @@
     <div class="container">
         <div class="card p-4 shadow-sm rounded">
             <h3>Tambah Buku Baru</h3>
-            <form action="/perpustakaan/addBookController" method="post">
+            <form action="${pageContext.request.contextPath}/TambahBukuController" method="post" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="namaBuku">Nama Buku</label>
-                    <input type="text" name="namaBuku" id="namaBuku" class="form-control" required placeholder="Masukkan nama buku">
+                    <label for="nama_buku">Nama Buku</label>
+                    <input type="text" name="nama_buku" id="nama_buku" class="form-control" required placeholder="Masukkan nama buku">
                 </div>
                 <div class="form-group">
-                    <label for="tipeBuku">Tipe Buku</label>
-                    <select name="tipeBuku" id="tipeBuku" class="form-control" required>
+                    <label for="tipe_buku">Tipe Buku</label>
+                    <select name="tipe_buku" id="tipe_buku" class="form-control" required>
                         <option value="fisik">Fisik</option>
                         <option value="online">Online</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="jenisBuku">Jenis Buku</label>
-                    <input type="text" name="jenisBuku" id="jenisBuku" class="form-control" required placeholder="Masukkan jenis buku">
+                    <label for="jenis_buku">Jenis Buku</label>
+                    <input type="text" name="jenis_buku" id="jenis_buku" class="form-control" required placeholder="Masukkan jenis buku">
                 </div>
                 <div class="form-group">
-                    <label for="tglTerbit">Tanggal Terbit</label>
-                    <input type="date" name="tglTerbit" id="tglTerbit" class="form-control" required>
+                    <label for="tgl_terbit">Tanggal Terbit</label>
+                    <input type="date" name="tgl_terbit" id="tgl_terbit" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label for="author">Penulis</label>
                     <input type="text" name="author" id="author" class="form-control" required placeholder="Masukkan nama penulis">
                 </div>
                 <div class="form-group">
-                    <label for="rakbuku">Rak Buku</label>
-                    <select name="rakbuku" id="rakbuku" class="form-control" required>
+                    <label for="rakbuku_id">Rak Buku</label>
+                    <select name="rakbuku_id" id="rakbuku_id" class="form-control" required>
                         <option value="">Pilih Rak Buku</option>
                         <% 
                             JDBC db = new JDBC();
@@ -102,10 +102,10 @@
                             try {
                                 rs = db.getData(sql);
                                 while (rs.next()) {
-                                    int rakbukuId = rs.getInt("rakbuku_id");
+                                    int rakbuku_id = rs.getInt("rakbuku_id");
                                     String jenisRak = rs.getString("jenis_rak");
                         %>
-                                    <option value="<%= rakbukuId %>"><%= jenisRak %></option>
+                                    <option value="<%= rakbuku_id %>"><%= jenisRak %></option>
                         <% 
                                 }
                             } catch (SQLException e) {
@@ -113,6 +113,18 @@
                             }
                         %>
                     </select>
+                </div>
+<!--                <div class="form-group">
+                    <label for="gambarBuku">Gambar Buku</label>
+                    <input type="file" name="gambarBuku" id="gambarBuku" class="form-control" accept="image/*">
+                </div>-->
+                <div class="form-group">
+                    <label for="jumlah">Jumlah Buku Masuk</label>
+                    <input type="number" name="jumlah" id="jumlah" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="gambarBuku">Cover Buku</label>
+                    <input type="file" name="gambarBuku" id="gambarBuku" class="form-control" accept="image/*" required>
                 </div>
                 <div class="button-group">
                     <button type="submit" class="btn btn-primary w-48">Tambah Buku</button>

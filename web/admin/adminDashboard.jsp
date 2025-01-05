@@ -101,18 +101,18 @@
                             for (Buku buku : listBuku) {
                     %>
                     <tr>
-                        <td><%= buku.getNamaBuku() %></td>
-                        <td><%= buku.getTipeBuku() %></td>
-                        <td><%= buku.getJenisBuku() %></td>
-                        <td><%= buku.getTglTerbit() %></td>
+                        <td><%= buku.getnama_buku() %></td>
+                        <td><%= buku.gettipe_buku() %></td>
+                        <td><%= buku.getjenis_buku() %></td>
+                        <td><%= buku.gettgl_terbit() %></td>
                         <td><%= buku.getAuthor() %></td>
                         <td><%= buku.getJenisRak() %></td>
                         <td>
-                            <%= buku.getStatusBuku() ? "Tidak Tersedia" : "Tersedia" %>
+                            <%= buku.getstatus_booking() ? "Tidak Tersedia" : "Tersedia" %>
                         </td>
                         <td>
-                            <a href="admin/editBook.jsp?bukuId=<%= buku.getBukuId() %>" class="btn btn-warning btn-sm">Edit</a>
-                            <a href="deleteBook?bukuId=<%= buku.getBukuId() %>" 
+                            <a href="admin/editBook.jsp?buku_id=<%= buku.getbuku_id() %>" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="deleteBook?buku_id=<%= buku.getbuku_id() %>" 
                                onclick="return confirm('Apakah Anda yakin ingin menghapus buku ini?')" 
                                class="btn btn-danger btn-sm">Hapus</a>
                         </td>
@@ -151,7 +151,7 @@
                             for (RakBuku rak : listRak) {
                     %>
                     <tr>
-                        <td><%= rak.getRakbuku_id() %></td>
+                        <td><%= rak.getRakbuku_id()%></td>
                         <td><%= rak.getJenis_rak() %></td>
                         <td><%= rak.getLokasi_rak() %></td>
                         <td>

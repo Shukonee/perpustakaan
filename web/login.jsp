@@ -36,7 +36,8 @@
     <div class="container">
             <div class="card p-4 shadow-sm rounded">
                 <h3 class="text-center">Login</h3>
-                <form action="loginController" method="post">
+                <form action="${pageContext.request.contextPath}/Authentication" method="post">
+                    <input type="hidden" name="action" value="login">
                     <div class="form-group">
                         <label for="email">Email:</label>
                         <input type="email" class="form-control" id="email" name="email" required>
@@ -47,10 +48,17 @@
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Login</button>
                 </form>
-                <div class="text-center">
+<!--                <div class="text-center">
                     <p class="card-text mb-2 mt-4">Haven't registered yet?</p>
                     <a href="register" class="btn btn-warning w-100">Register</a>
-                </div>
+                </div>-->
+                <form action = "${pageContext.request.contextPath}/Authentication" method = "GET">
+                    <div class="text-center">
+                        <input type="hidden" name="action" value="register">
+                        <p class="card-text mb-2 mt-4">Haven't registered yet?</p>
+                        <button class="btn btn-warning w-100">Register</button>
+                    </div>
+                </form>
             </div>
         </div>
 

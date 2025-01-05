@@ -23,7 +23,7 @@ public class deleteRakController extends HttpServlet {
             JDBC db = new JDBC();
             if (db.isConnected) {
                 try {
-                    String sql = "DELETE FROM rakbuku WHERE rakbuku_id = ?";
+                    String sql = "DELETE FROM rakbuku_id_fk WHERE rakbuku_id_fk = ?";
                     PreparedStatement stmt = db.getConnection().prepareStatement(sql);
                     stmt.setInt(1, Integer.parseInt(id));
                     int rowsDeleted = stmt.executeUpdate(); 

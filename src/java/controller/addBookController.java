@@ -16,24 +16,24 @@ public class addBookController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String namaBuku = request.getParameter("namaBuku");
-        String tipeBuku = request.getParameter("tipeBuku");
-        String jenisBuku = request.getParameter("jenisBuku");
-        String tglTerbit = request.getParameter("tglTerbit");
+        String nama_buku = request.getParameter("nama_buku");
+        String tipe_buku = request.getParameter("tipe_buku");
+        String jenis_buku = request.getParameter("jenis_buku");
+        String tgl_terbit = request.getParameter("tgl_terbit");
         String author = request.getParameter("author");
-        String rakbukuIdStr = request.getParameter("rakbuku");
-
+        String rakbuku_idStr = request.getParameter("rakbuku_id");
+        System.out.println("Rak Buku ID: "+rakbuku_idStr);
         // Cek apakah rak buku terpilih
-        if (rakbukuIdStr == null || rakbukuIdStr.isEmpty()) {
-            response.sendRedirect("admin/addBook.jsp?error=rakbukuEmpty"); 
+        if (rakbuku_idStr == null || rakbuku_idStr.isEmpty()) {
+            response.sendRedirect("admin/addBook.jsp?error=rakbuku_idEmpty"); 
             return;
         }
 
-        int rakbukuId = 0;
+        int rakbuku_id = 0;
         try {
-            rakbukuId = Integer.parseInt(rakbukuIdStr);
+            rakbuku_id = Integer.parseInt(rakbuku_idStr);
         } catch (NumberFormatException e) {
-            response.sendRedirect("admin/addBook.jsp?error=invalidRakbukuId"); 
+            response.sendRedirect("admin/addBook.jsp?error=invalidrakbuku_id_fk"); 
             return;
         }
 
@@ -56,15 +56,15 @@ public class addBookController extends HttpServlet {
             String sql = "INSERT INTO buku (nama_buku, tipe_buku, jenis_buku, tgl_terbit, author, rakbuku_id_fk) "
                     + "VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = db.getConnection().prepareStatement(sql);
-            stmt.setString(1, namaBuku);
-            stmt.setString(2, tipeBuku);
-            stmt.setString(3, jenisBuku);
-            stmt.setString(4, tglTerbit);
+            stmt.setString(1, nama_buku);
+            stmt.setString(2, tipe_buku);
+            stmt.setString(3, jenis_buku);
+            stmt.setString(4, tgl_terbit);
             stmt.setString(5, author);
-            stmt.setInt(6, rakbukuId);
+            stmt.setInt(6, rakbuku_id);
 
             System.out.println("Executing query: " + sql);
-            System.out.println("Parameters: " + namaBuku + ", " + tipeBuku + ", " + jenisBuku + ", " + tglTerbit + ", " + author + ", " + rakbukuId);
+            System.out.println("Parameters: " + nama_buku + ", " + tipe_buku + ", " + jenis_buku + ", " + tgl_terbit + ", " + author + ", " + rakbuku_id);
 
             int result = stmt.executeUpdate();
             if (result > 0) {

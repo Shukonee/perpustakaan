@@ -69,19 +69,19 @@
         <div class="card p-4 shadow-sm rounded">
             <h3>Edit Buku</h3>
             <%
-                String bukuId = request.getParameter("bukuId");
+                String buku_id = request.getParameter("buku_id");
                 JDBC db = new JDBC();
                 ResultSet rs = null;
                 ResultSet rakResultSet = null;
                 
                 try {
-                    rs = db.getData("SELECT * FROM buku WHERE buku_id = " + bukuId);
+                    rs = db.getData("SELECT * FROM buku WHERE buku_id = " + buku_id);
                     if (rs.next()) {
                         // Store the book data in variables
-                        String namaBuku = rs.getString("nama_buku");
-                        String tipeBuku = rs.getString("tipe_buku");
-                        String jenisBuku = rs.getString("jenis_buku");
-                        String tglTerbit = rs.getString("tgl_terbit");
+                        String nama_buku = rs.getString("nama_buku");
+                        String tipe_buku = rs.getString("tipe_buku");
+                        String jenis_buku = rs.getString("jenis_buku");
+                        String tgl_terbit = rs.getString("tgl_terbit");
                         String author = rs.getString("author");
                         int currentRakId = rs.getInt("rakbuku_id_fk");
                         
@@ -89,35 +89,35 @@
                         rs.close();
                         
                         // Get rak data
-                        rakResultSet = db.getData("SELECT * FROM rakbuku");
+                        rakResultSet = db.getData("SELECT * FROM rakbuku_id_fk");
             %>
             <form action="/perpustakaan/editBook" method="POST">
-                <input type="hidden" name="bukuId" value="<%= bukuId %>">
+                <input type="hidden" name="buku_id" value="<%= buku_id %>">
 
                 <div class="form-group">
                     <label for="nama_buku">Nama Buku</label>
                     <input type="text" name="nama_buku" id="nama_buku" class="form-control" 
-                           value="<%= namaBuku %>" required>
+                           value="<%= nama_buku %>" required>
                 </div>
 
                 <div class="form-group">
                     <label for="tipe_buku">Tipe Buku</label>
                     <select name="tipe_buku" id="tipe_buku" class="form-control" required>
-                        <option value="Fisik" <%= tipeBuku.equals("Fisik") ? "selected" : "" %>>Fisik</option>
-                        <option value="Online" <%= tipeBuku.equals("Online") ? "selected" : "" %>>Online</option>
+                        <option value="Fisik" <%= tipe_buku.equals("Fisik") ? "selected" : "" %>>Fisik</option>
+                        <option value="Online" <%= tipe_buku.equals("Online") ? "selected" : "" %>>Online</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="jenis_buku">Jenis Buku</label>
                     <input type="text" name="jenis_buku" id="jenis_buku" class="form-control" 
-                           value="<%= jenisBuku %>" required>
+                           value="<%= jenis_buku %>" required>
                 </div>
 
                 <div class="form-group">
                     <label for="tgl_terbit">Tanggal Terbit</label>
                     <input type="date" name="tgl_terbit" id="tgl_terbit" class="form-control" 
-                           value="<%= tglTerbit %>" required>
+                           value="<%= tgl_terbit %>" required>
                 </div>
 
                 <div class="form-group">
@@ -127,11 +127,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="rakbuku_id">Rak Buku</label>
-                    <select name="rakbuku_id" id="rakbuku_id" class="form-control" required>
+                    <label for="rakbuku_id_fk">Rak Buku</label>
+                    <select name="rakbuku_id_fk" id="rakbuku_id_fk" class="form-control" required>
                         <%
                             while (rakResultSet.next()) {
-                                int rakId = rakResultSet.getInt("rakbuku_id");
+                                int rakId = rakResultSet.getInt("rakbuku_id_fk");
                         %>
                         <option value="<%= rakId %>" <%= currentRakId == rakId ? "selected" : "" %>>
                             <%= rakResultSet.getString("jenis_rak") %>
@@ -150,7 +150,7 @@
             <%
                     } else {
             %>
-            <p class="text-danger text-center">Buku dengan ID <%= bukuId %> tidak ditemukan.</p>
+            <p class="text-danger text-center">Buku dengan ID <%= buku_id %> tidak ditemukan.</p>
             <%
                     }
                 } catch (SQLException e) {

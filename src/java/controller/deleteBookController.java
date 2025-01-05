@@ -17,7 +17,7 @@ import javax.servlet.annotation.WebServlet;
 @WebServlet("/deleteBook")
 public class deleteBookController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id = request.getParameter("bukuId");
+        String id = request.getParameter("buku_id");
 
         if (id != null && id.matches("\\d+")) { 
             JDBC db = new JDBC();
