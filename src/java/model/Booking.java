@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.time.LocalDate;
+import model.Member;
+import model.Member;
 /**
  *
  * @author maxeef
@@ -17,6 +19,8 @@ public class Booking extends Model<Booking>{
     private LocalDate expired_date;
     private int member_id_fk;
     private int bukuDetails_id_fk;
+    private Member member;
+    private BukuDetails bukuDetail;
     
     public Booking(){
         this.table = "Booking";
@@ -36,19 +40,46 @@ public class Booking extends Model<Booking>{
     @Override
     public Booking toModel(ResultSet rs) {
         try {
-            return new Booking(
+            Booking booking = new Booking(
                 rs.getInt("booking_id"),
                 rs.getDate("booking_date").toLocalDate(),
                 rs.getDate("expired_date").toLocalDate(),
                 rs.getInt("member_id_fk"),
                 rs.getInt("bukuDetails_id_fk")
             );
+            
+            try {
+                Member member = new Member();
+                System.out.println("Member ID FK: "+this.member_id_fk);
+                booking.setMember(member.find(String.valueOf(booking.getMember_id_fk())));
+            } catch (Exception e) {
+                System.out.println("Error loading member: " + e.getMessage());
+            }
+            BukuDetails bukuDetail = new BukuDetails();
+            System.out.println("BUKUDETAILS ID FK: "+bukuDetails_id_fk);
+            booking.setBukuDetail(bukuDetail.find(String.valueOf(booking.getBukuDetails_id_fk())));
+            
+            return booking;
         } catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error Bapak: " + e.getMessage());
             return null;
         }
     }
-
+    public Member getMember() {
+        return member;
+    }
+    
+    public void setMember(Member member) {
+        this.member = member;
+    }
+    public BukuDetails getBukuDetail() {
+        return bukuDetail;
+    }
+    
+    public void setBukuDetail(BukuDetails bukuDetail) {
+        this.bukuDetail = bukuDetail;
+    }
+    
     public int getBooking_id() {
         return booking_id;
     }

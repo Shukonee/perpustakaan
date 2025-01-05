@@ -7,6 +7,7 @@ package model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import model.Buku;
 
 /**
  *
@@ -17,6 +18,7 @@ public class BukuDetails extends Model<BukuDetails> {
     private int status;
     private String keluhan;
     private int buku_id_fk;
+    private Buku buku;
     
     public BukuDetails() {
         this.table = "BukuDetails";
@@ -35,20 +37,31 @@ public class BukuDetails extends Model<BukuDetails> {
     @Override
     public BukuDetails toModel(ResultSet rs) {
         try {
-            return new BukuDetails(
+            BukuDetails bukuDetails = new BukuDetails(
                 rs.getInt("id"),
                 rs.getInt("status"),
                 rs.getString("keluhan"),
                 rs.getInt("buku_id_fk")
             );
+            Buku buku = new Buku();
+            bukuDetails.setBuku(buku.find(String.valueOf(bukuDetails.getBuku_id_fk())));
+            
+            return bukuDetails;
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
             return null;
         }
     }
     
+    public Buku getBuku(){
+        return buku;
+    }
+    
+    public void setBuku(Buku buku){
+        this.buku = buku;
+    }
+    
     public BukuDetails getBukuDetailsById(int id){
-        System.out.println("IDDDDDDDDDDDD: "+id);
         return find(String.valueOf(id));
     }
     

@@ -27,7 +27,7 @@ public abstract class Model<E> {
             
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                con = DriverManager.getConnection( "jdbc:mysql://localhost:3306/perpus_pbo_2024","root","admin"); 
+                con = DriverManager.getConnection( "jdbc:mysql://localhost:3306/perpus_pbo_2024","root",""); 
                 stmt = con.createStatement();
                 isConnected = true;
                 message = "Database Terkoneksi";
@@ -66,7 +66,6 @@ public abstract class Model<E> {
                 System.out.println("info insert: " + result + " rows affected");
             } catch (IllegalAccessException | IllegalArgumentException | SecurityException | SQLException e) {
                 message = e.getMessage();
-                System.out.println(message);
             } finally {
                 disconnect();
             }
@@ -91,7 +90,6 @@ public abstract class Model<E> {
                 System.out.println(message);
             } catch (IllegalAccessException | IllegalArgumentException | SecurityException | SQLException e) {
                 message = e.getMessage();
-                System.out.println(message);
             } finally {
                 disconnect();
             }
@@ -174,16 +172,20 @@ public abstract class Model<E> {
         }
 
         public E find(String pkValue) {
+            System.out.println("mau masuk find");
             try {
                 connect();
+                
                 String query = "SELECT " +  select + " FROM " + table + " WHERE " + primaryKey + " = '" + pkValue +"'";
+                System.out.println("MMMMM: "+query);
                 ResultSet rs = stmt.executeQuery(query);
                 if (rs.next()) {
                     return toModel(rs);
                 }
+                
             } catch (SQLException e) {
                 message = e.getMessage();
-                System.out.println(message);
+                System.out.println("Bapak: "+message);
             } finally {
                 disconnect();
                 select = "*";

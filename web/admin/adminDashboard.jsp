@@ -72,12 +72,14 @@
         
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h3 class="text-secondary">Daftar Buku</h3>
+            <a href="${pageContext.request.contextPath}/ListPinjamanController" class = "btn btn-primary">List Pinjaman</a>
             <form action="dashboard" method="get" class="d-flex mb-4 w-50">
                 <input type="text" name="search" class="form-control me-2" 
                        placeholder="Cari buku berdasarkan nama, tipe, jenis, atau author..." value="${param.search}">
                 <button type="submit" class="btn btn-primary">Cari</button>
             </form>
             <a href="admin/addBook.jsp" class="btn btn-primary">Tambah Buku</a>
+            
         </div>
 
         <div class="card mb-4">
