@@ -93,16 +93,6 @@
             </div>
         </div>
 
-        <!-- Content -->
-        <div class="container">
-            <div class="row">
-                <div class="col-12 mb-3">
-                    <a href="booking/create" class="btn btn-primary">
-                        <i class="fas fa-plus"></i> Tambah Booking Baru
-                    </a>
-                </div>
-            </div>
-            
             <div class="row">
                 <% for (Booking booking : bookings) { 
                     boolean isExpired = booking.getExpired_date().isBefore(java.time.LocalDate.now());
@@ -143,11 +133,6 @@
                             <div class="d-flex gap-2">
                                 <a href="booking/edit?id=<%= booking.getBooking_id() %>" class="btn btn-primary">
                                     <i class="fas fa-edit"></i> Edit
-                                </a>
-                                <a href="booking/delete?id=<%= booking.getBooking_id() %>" 
-                                   class="btn btn-danger"
-                                   onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                    <i class="fas fa-trash"></i> Hapus
                                 </a>
                             </div>
                         </div>
