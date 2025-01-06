@@ -27,7 +27,7 @@ public abstract class Model<E> {
             
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                con = DriverManager.getConnection( "jdbc:mysql://localhost:3306/perpus_pbo_2024","root","admin"); 
+                con = DriverManager.getConnection( "jdbc:mysql://localhost:3306/perpus_pbo_2024","root",""); 
                 stmt = con.createStatement();
                 isConnected = true;
                 message = "Database Terkoneksi";

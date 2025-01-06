@@ -3,15 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/maxeef/Documents/Kuliah/Mata%20Kuliah/Semester%205/pbo/Kelas/perpustakaan/web/booking.jsp</file>
-            <file>file:/home/maxeef/Documents/Kuliah/Mata%20Kuliah/Semester%205/pbo/Kelas/perpustakaan/src/java/model/Booking.java</file>
-            <file>file:/home/maxeef/Documents/Kuliah/Mata%20Kuliah/Semester%205/pbo/Kelas/perpustakaan/nbproject/build-impl.xml</file>
-            <file>file:/home/maxeef/Documents/Kuliah/Mata%20Kuliah/Semester%205/pbo/Kelas/perpustakaan/src/java/model/BukuDetails.java</file>
-            <file>file:/home/maxeef/Documents/Kuliah/Mata%20Kuliah/Semester%205/pbo/Kelas/perpustakaan/src/java/controller/BookingController.java</file>
-            <file>file:/home/maxeef/Documents/Kuliah/Mata%20Kuliah/Semester%205/pbo/Kelas/perpustakaan/src/java/model/Model.java</file>
-            <file>file:/home/maxeef/Documents/Kuliah/Mata%20Kuliah/Semester%205/pbo/Kelas/perpustakaan/src/java/controller/homeController.java</file>
-            <file>file:/home/maxeef/Documents/Kuliah/Mata%20Kuliah/Semester%205/pbo/Kelas/perpustakaan/src/java/controller/AuthController.java</file>
-            <file>file:/home/maxeef/Documents/Kuliah/Mata%20Kuliah/Semester%205/pbo/Kelas/perpustakaan/web/home.jsp</file>
+            <file>file:/D:/Campus/SEMESTER%205/perpustakaan/src/java/controller/BookingController.java</file>
+            <file>file:/D:/Campus/SEMESTER%205/perpustakaan/web/profile.jsp</file>
+            <file>file:/D:/Campus/SEMESTER%205/perpustakaan/src/java/model/Booking.java</file>
+            <file>file:/D:/Campus/SEMESTER%205/perpustakaan/src/java/controller/deleteBookController.java</file>
+            <file>file:/D:/Campus/SEMESTER%205/perpustakaan/src/java/controller/profileController.java</file>
+            <file>file:/D:/Campus/SEMESTER%205/perpustakaan/src/java/db/JDBC.java</file>
+            <file>file:/D:/Campus/SEMESTER%205/perpustakaan/src/java/model/Model.java</file>
         </group>
     </open-files>
 </project-private>

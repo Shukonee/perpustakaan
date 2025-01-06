@@ -36,6 +36,7 @@
                                 <tr>
                                     <th>Book Name</th>
                                     <th>Expiry Date</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -43,6 +44,13 @@
                                     <tr>
                                         <td><%= booking.getBukuDetail().getBuku().getnama_buku() %><%= booking.getBooking_id() %></td>
                                         <td><%= booking.getExpired_date() %></td>
+                                        <td>
+                                            <form action="Booking" method="POST">
+                                            <input type="hidden" name="return" value="true">
+                                            <input type="hidden" name="bukuDetails" value="<%= booking.getBukuDetails_id_fk() %>">
+                                            <button class="btn btn-warning">Kembalikan Buku</button>
+                                        </form>
+                                        </td>
                                     </tr>
                                 <% } %>
                             </tbody>

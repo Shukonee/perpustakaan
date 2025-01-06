@@ -82,6 +82,58 @@ public class BookingController extends HttpServlet {
 
         int userId = (int) session.getAttribute("userId");
         
+    if (request.getParameter("return") != null) {
+        int bukuDetailsId = Integer.parseInt(request.getParameter("bukuDetails"));
+        JDBC db = new JDBC();
+
+        try {
+            // Start transaction
+            db.getConnection().setAutoCommit(false);
+
+            // Update BukuDetails status
+            String queryBukuDetails = "UPDATE BukuDetails SET status = 1 WHERE id = ?";
+            PreparedStatement pstmtBukuDetails = db.getPreparedStatement(queryBukuDetails);
+            pstmtBukuDetails.setInt(1, bukuDetailsId);
+            pstmtBukuDetails.executeUpdate();
+
+            // Get buku_id from BukuDetails
+            String queryGetBukuId = "SELECT buku_id_fk FROM BukuDetails WHERE id = ?";
+            PreparedStatement pstmtGetBukuId = db.getPreparedStatement(queryGetBukuId);
+            pstmtGetBukuId.setInt(1, bukuDetailsId);
+            ResultSet rs = pstmtGetBukuId.executeQuery();
+
+            if (rs.next()) {
+                int bukuId = rs.getInt("buku_id_fk");
+                // Update Buku status_booking
+                String queryBuku = "UPDATE buku SET status_booking = 0 WHERE buku_id = ?";
+                PreparedStatement pstmtBuku = db.getPreparedStatement(queryBuku);
+                pstmtBuku.setInt(1, bukuId);
+                pstmtBuku.executeUpdate();
+            }
+
+            // Commit transaction
+            db.getConnection().commit();
+
+        } catch (SQLException e) {
+            try {
+                db.getConnection().rollback();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            e.printStackTrace();
+        } finally {
+            try {
+                db.getConnection().setAutoCommit(true);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            db.disconnect();
+        }
+
+        response.sendRedirect("profileController");
+        return;
+    }
+        
         String bukuDetailsStr = request.getParameter("bukuDetails");
         if (bukuDetailsStr == null || bukuDetailsStr.isEmpty()){
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Parameter tidak lengkap.");
