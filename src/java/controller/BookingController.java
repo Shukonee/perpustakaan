@@ -17,6 +17,7 @@ import model.BukuDetails;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import model.Booking;
+import model.Member;
 
 /**
  *
@@ -88,7 +89,13 @@ public class BookingController extends HttpServlet {
         LocalDate expired_date = LocalDate.parse(expiredDateStr);
         LocalDate bookingDate = LocalDate.now();
         Booking booking = new Booking();
-        booking.setMember_id_fk(userId);
+        
+        Member memberObj = new Member();
+        memberObj.where("account_id_fk = " + userId);
+        ArrayList<Member> members = memberObj.get();
+        Member member = members.get(0);
+        
+        booking.setMember_id_fk(member.getMember_id());
         booking.setBukuDetails_id_fk(bukuDetailsId);
         booking.setExpired_date(expired_date);
         booking.setBooking_date(bookingDate);

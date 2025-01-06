@@ -152,6 +152,7 @@ public abstract class Model<E> {
                 if (!join.equals("")) query += join;
                 if (!where.equals("")) query += " WHERE " + where;
                 if (!otherQuery.equals("")) query += " " + otherQuery;
+                System.out.println("mamak" + query);
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {
                     res.add(toModel(rs));
