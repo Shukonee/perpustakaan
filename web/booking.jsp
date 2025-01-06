@@ -58,7 +58,13 @@
                         <div class="card-body">
                             <h5 class="card-title"><%=buku.getnama_buku()%></h5>
                             <p class="card-text">description</p>
-                            <p class="card-text">Keluhan Buku <%=bukuDetails.getId()%>: <%=bukuDetails.getKeluhan()%></p>
+                            <p class="card-text mb-1"><strong>Nama Buku:</strong> <%= buku.getnama_buku() %></p>
+                            <p class="card-text mb-1"><strong>Tipe Buku:</strong> <%= buku.gettipe_buku()%></p>
+                            <p class="card-text mb-1"><strong>Jenis Buku:</strong> <%= buku.getjenis_buku()%></p>
+                            <p class="card-text mb-1"><strong>Tanggal Terbit:</strong> <%= buku.gettgl_terbit()%></p>
+                            <p class="card-text mb-1"><strong>Author:</strong> <%= buku.getAuthor()%></p>
+                            <p class="card-text mb-1"><strong>Rak Buku:</strong> <%= buku.getJenisRak()%></p>
+                            <p class="card-text mb-1"><strong>Status Booking:</strong> <%= buku.getstatus_booking() ? "Booked" : "Tersedia"%></p>
                         </div>
                     </div>
                 </div>
