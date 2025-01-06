@@ -33,7 +33,7 @@
                 <td><%= booking.getBooking_id()%></td>
                 <td><%=booking.getBooking_date()%></td>
                 <td><%=booking.getExpired_date()%></td>
-                <td><%=booking.getMember()%> </td>
+                <td><%=booking.getMember().getNama_depan()%> </td>
                 <td><%=booking.getBukuDetail().getBuku().getnama_buku()%></td>
                 <td>
                     <a href="booking/edit?id=${booking.booking_id}">Edit</a>

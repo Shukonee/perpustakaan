@@ -4,15 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/maxeef/Documents/Kuliah/Mata%20Kuliah/Semester%205/pbo/Kelas/perpustakaan/web/booking.jsp</file>
-            <file>file:/home/maxeef/Documents/Kuliah/Mata%20Kuliah/Semester%205/pbo/Kelas/perpustakaan/web/admin/adminDashboard.jsp</file>
-            <file>file:/home/maxeef/Documents/Kuliah/Mata%20Kuliah/Semester%205/pbo/Kelas/perpustakaan/web/admin/addBook.jsp</file>
+            <file>file:/home/maxeef/Documents/Kuliah/Mata%20Kuliah/Semester%205/pbo/Kelas/perpustakaan/src/java/model/Booking.java</file>
+            <file>file:/home/maxeef/Documents/Kuliah/Mata%20Kuliah/Semester%205/pbo/Kelas/perpustakaan/nbproject/build-impl.xml</file>
             <file>file:/home/maxeef/Documents/Kuliah/Mata%20Kuliah/Semester%205/pbo/Kelas/perpustakaan/src/java/model/BukuDetails.java</file>
             <file>file:/home/maxeef/Documents/Kuliah/Mata%20Kuliah/Semester%205/pbo/Kelas/perpustakaan/src/java/controller/BookingController.java</file>
             <file>file:/home/maxeef/Documents/Kuliah/Mata%20Kuliah/Semester%205/pbo/Kelas/perpustakaan/src/java/model/Model.java</file>
+            <file>file:/home/maxeef/Documents/Kuliah/Mata%20Kuliah/Semester%205/pbo/Kelas/perpustakaan/src/java/controller/homeController.java</file>
+            <file>file:/home/maxeef/Documents/Kuliah/Mata%20Kuliah/Semester%205/pbo/Kelas/perpustakaan/src/java/controller/AuthController.java</file>
             <file>file:/home/maxeef/Documents/Kuliah/Mata%20Kuliah/Semester%205/pbo/Kelas/perpustakaan/web/home.jsp</file>
-            <file>file:/home/maxeef/Documents/Kuliah/Mata%20Kuliah/Semester%205/pbo/Kelas/perpustakaan/src/java/controller/TambahBukuController.java</file>
-            <file>file:/home/maxeef/Documents/Kuliah/Mata%20Kuliah/Semester%205/pbo/Kelas/perpustakaan/src/java/model/Buku.java</file>
-            <file>file:/home/maxeef/Documents/Kuliah/Mata%20Kuliah/Semester%205/pbo/Kelas/perpustakaan/src/java/model/RakBuku.java</file>
         </group>
     </open-files>
 </project-private>

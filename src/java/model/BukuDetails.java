@@ -110,14 +110,11 @@ public class BukuDetails extends Model<BukuDetails> {
     }
     
     public void tambahBukuDetails(int buku_id,int jumlah){
-        System.out.println("Mau Masuk");
         for (int i=0;i<jumlah;i++){
-            System.out.println("Dimasukkan");
             BukuDetails bukuDetails = new BukuDetails();
             bukuDetails.setStatus(1);
             bukuDetails.setKeluhan("Tidak ada");
             bukuDetails.setBuku_id_fk(buku_id);
-            System.out.println("Inserting BukuDetails for Buku ID: " + buku_id+this.status);
             bukuDetails.insert();
         }
     }

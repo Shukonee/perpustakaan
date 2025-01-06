@@ -11,7 +11,7 @@ public class JDBC {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");  
             con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/perpus_pbo_2024","root","");  
+                "jdbc:mysql://localhost:3306/perpus_pbo_2024","root","admin");  
             stmt = con.createStatement();
             isConnected = true;
             message = "DB connected";

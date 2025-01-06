@@ -11,37 +11,38 @@ import java.sql.SQLException;
  * @author alfin
  */
 public class Member extends Model<Member>{
-    private int member_id,account_id_fk;
-    private String nama_depan, nama_belakang;
+    private int member_id;
+    private String nama_depan;
+    private String nama_belakang;
     private LocalDate tanggal_lahir;
+    private int account_id_fk;
     
     public Member(){
-        this.table = "member";
+        this.table = "Member";
         this.primaryKey = "member_id";
     }
 
-    public Member(int member_id, int account_id_fk, String nama_depan, String nama_belakang, LocalDate tanggal_lahir) {
-        this.table = "member";
+    public Member(int member_id, String nama_depan, String nama_belakang, LocalDate tanggal_lahir, int account_id_fk) {
+        this.table = "Member";
         this.primaryKey = "member_id";
         this.member_id = member_id;
-        this.account_id_fk = account_id_fk;
         this.nama_depan = nama_depan;
         this.nama_belakang = nama_belakang;
         this.tanggal_lahir = tanggal_lahir;
+        this.account_id_fk = account_id_fk;
     }
     
     @Override
     public Member toModel(ResultSet rs){
         try{
             return new Member(
-                rs.getInt("buku_id"),
-                rs.getInt("account_id_fk"),
+                rs.getInt("member_id"),
                 rs.getString("nama_depan"),
                 rs.getString("nama_belakang"),
-                rs.getDate("tgl_terbit").toLocalDate()
+                rs.getDate("tanggal_lahir").toLocalDate(),
+                rs.getInt("account_id_fk")
             );
         } catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
             return null;
         }
     }

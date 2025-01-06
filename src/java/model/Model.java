@@ -27,7 +27,7 @@ public abstract class Model<E> {
             
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                con = DriverManager.getConnection( "jdbc:mysql://localhost:3306/perpus_pbo_2024","root",""); 
+                con = DriverManager.getConnection( "jdbc:mysql://localhost:3306/perpus_pbo_2024","root","admin"); 
                 stmt = con.createStatement();
                 isConnected = true;
                 message = "Database Terkoneksi";
@@ -59,11 +59,9 @@ public abstract class Model<E> {
                         values += value + "', '";
                     }
                 }
-                System.out.println("DIe for you");
                 int result = stmt.executeUpdate("INSERT INTO " + table + "(" + cols.substring(0, cols.length() - 2) + ")"
                                                 + " VALUES ('" + values.substring(0, values.length() - 4) + "')");
                 message = "info insert: " + result + " rows affected";
-                System.out.println("info insert: " + result + " rows affected");
             } catch (IllegalAccessException | IllegalArgumentException | SecurityException | SQLException e) {
                 message = e.getMessage();
             } finally {
@@ -87,7 +85,6 @@ public abstract class Model<E> {
                 int result = stmt.executeUpdate("UPDATE " + table + " SET " + values.substring(0, values.length() - 2)
                                                 + " WHERE " + primaryKey + " = '" + pkValue +"'");
                 message = "info update: " + result + " rows affected";
-                System.out.println(message);
             } catch (IllegalAccessException | IllegalArgumentException | SecurityException | SQLException e) {
                 message = e.getMessage();
             } finally {
@@ -172,24 +169,25 @@ public abstract class Model<E> {
         }
 
         public E find(String pkValue) {
-            System.out.println("mau masuk find");
             try {
                 connect();
                 
                 String query = "SELECT " +  select + " FROM " + table + " WHERE " + primaryKey + " = '" + pkValue +"'";
-                System.out.println("MMMMM: "+query);
+                System.out.println("Query Find: "+query);
                 ResultSet rs = stmt.executeQuery(query);
+                System.out.println("Rs: "+rs);
                 if (rs.next()) {
+                    System.out.println("Berhasil toModel");
                     return toModel(rs);
                 }
                 
             } catch (SQLException e) {
                 message = e.getMessage();
-                System.out.println("Bapak: "+message);
             } finally {
                 disconnect();
                 select = "*";
             }
+            System.out.println("Tidak Berhasil ToModel");
             return null;
         }
 

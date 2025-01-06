@@ -40,7 +40,7 @@ public class Booking extends Model<Booking>{
     @Override
     public Booking toModel(ResultSet rs) {
         try {
-            Booking booking = new Booking(
+            Booking booking1 = new Booking(
                 rs.getInt("booking_id"),
                 rs.getDate("booking_date").toLocalDate(),
                 rs.getDate("expired_date").toLocalDate(),
@@ -49,19 +49,17 @@ public class Booking extends Model<Booking>{
             );
             
             try {
-                Member member = new Member();
-                System.out.println("Member ID FK: "+this.member_id_fk);
-                booking.setMember(member.find(String.valueOf(booking.getMember_id_fk())));
+                Member memberObj = new Member();
+                booking1.setMember(memberObj.find(String.valueOf(booking1.getMember_id_fk())));
             } catch (Exception e) {
                 System.out.println("Error loading member: " + e.getMessage());
             }
             BukuDetails bukuDetail = new BukuDetails();
-            System.out.println("BUKUDETAILS ID FK: "+bukuDetails_id_fk);
-            booking.setBukuDetail(bukuDetail.find(String.valueOf(booking.getBukuDetails_id_fk())));
+            booking1.setBukuDetail(bukuDetail.find(String.valueOf(booking1.getBukuDetails_id_fk())));
             
-            return booking;
+            return booking1;
         } catch (SQLException e) {
-            System.out.println("Error Bapak: " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
             return null;
         }
     }
