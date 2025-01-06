@@ -71,7 +71,11 @@ public class Buku extends Model<Buku>{
             return null;
         }
     }
-    
+
+    public void setStatus_booking(boolean status_booking) {
+        this.status_booking = status_booking;
+    }
+
     public Buku getBukuById(int buku_id){
         return find(String.valueOf(buku_id));
     }

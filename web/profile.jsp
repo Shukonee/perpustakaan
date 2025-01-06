@@ -41,7 +41,7 @@
                             <tbody>
                                 <% for (Booking booking : bookings) { %>
                                     <tr>
-                                        <td><%= booking.getBukuDetail().getBuku().getnama_buku() %></td>
+                                        <td><%= booking.getBukuDetail().getBuku().getnama_buku() %><%= booking.getBooking_id() %></td>
                                         <td><%= booking.getExpired_date() %></td>
                                     </tr>
                                 <% } %>

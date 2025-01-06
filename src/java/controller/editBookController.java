@@ -29,7 +29,7 @@ public class editBookController extends HttpServlet {
         String jenis_buku = request.getParameter("jenis_buku");
         String tgl_terbit = request.getParameter("tgl_terbit");
         String author = request.getParameter("author");
-        String rakbuku_id_fk = request.getParameter("rakbuku_id_fk");
+        String rakbuku_id_fk = request.getParameter("rakbuku_id");
         
         if (buku_id == null || nama_buku == null || tipe_buku == null || 
             jenis_buku == null || tgl_terbit == null || author == null || rakbuku_id_fk == null) {

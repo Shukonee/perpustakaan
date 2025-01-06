@@ -89,7 +89,7 @@
                         rs.close();
                         
                         // Get rak data
-                        rakResultSet = db.getData("SELECT * FROM rakbuku_id_fk");
+                        rakResultSet = db.getData("SELECT * FROM rakbuku");
             %>
             <form action="/perpustakaan/editBook" method="POST">
                 <input type="hidden" name="buku_id" value="<%= buku_id %>">
@@ -127,11 +127,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="rakbuku_id_fk">Rak Buku</label>
-                    <select name="rakbuku_id_fk" id="rakbuku_id_fk" class="form-control" required>
+                    <label for="rakbuku_id">Rak Buku</label>
+                    <select name="rakbuku_id" id="rakbuku_id" class="form-control" required>
                         <%
                             while (rakResultSet.next()) {
-                                int rakId = rakResultSet.getInt("rakbuku_id_fk");
+                                int rakId = rakResultSet.getInt("rakbuku_id");
                         %>
                         <option value="<%= rakId %>" <%= currentRakId == rakId ? "selected" : "" %>>
                             <%= rakResultSet.getString("jenis_rak") %>

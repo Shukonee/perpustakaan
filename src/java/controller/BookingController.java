@@ -4,6 +4,10 @@
  */
 package controller;
 
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
+import db.JDBC;
 import java.util.ArrayList;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -48,10 +52,10 @@ public class BookingController extends HttpServlet {
                 BukuDetails bukuDetailsModel = new BukuDetails();
                 bukuDetailsModel.where("buku_id_fk = " + buku_id + " AND status = true");
                 ArrayList<BukuDetails> availableDetails = bukuDetailsModel.get();
-
+                
                 if (!availableDetails.isEmpty()) {
                     BukuDetails selectedDetail = availableDetails.get(0);
-
+                    
                     request.setAttribute("buku", buku);
                     request.setAttribute("bukuDetails", selectedDetail);
                     request.getRequestDispatcher("booking.jsp").forward(request, response);
@@ -83,8 +87,20 @@ public class BookingController extends HttpServlet {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Parameter tidak lengkap.");
             return;
         }
-        
         int bukuDetailsId = Integer.parseInt(bukuDetailsStr);
+        BukuDetails obj = new BukuDetails();
+        BukuDetails bukuDetails = obj.getBukuDetailsById(bukuDetailsId);
+        
+        bukuDetails.where("buku_id_fk = " + bukuDetails.getBuku().getbuku_id() + " AND status = true");
+        ArrayList<BukuDetails> availableDetails = bukuDetails.get();
+        
+        if (availableDetails.size() == 1) {
+            bukuDetails.getBuku().setStatus_booking(true);
+            bukuDetails.getBuku().update();
+            System.out.println("Buku "+bukuDetails.getBuku().getnama_buku()+" Berhasil di NonAktifkan");
+        }
+        
+        
         String expiredDateStr = request.getParameter("deadline");
         LocalDate expired_date = LocalDate.parse(expiredDateStr);
         LocalDate bookingDate = LocalDate.now();
@@ -101,10 +117,34 @@ public class BookingController extends HttpServlet {
         booking.setBooking_date(bookingDate);
         booking.insert();
         
-        BukuDetails obj = new BukuDetails();
-        BukuDetails bukuDetails = obj.getBukuDetailsById(bukuDetailsId);
-        bukuDetails.setStatus(0);
-        bukuDetails.update();
+        
+        JDBC db = new JDBC();
+        if (db.isConnected) {
+            try {
+                // Membuat query dengan parameter
+                String query = "UPDATE BukuDetails SET status = 0 WHERE id = ?";
+
+                // Membuat prepared statement
+                PreparedStatement pstmt = db.getPreparedStatement(query);
+
+                // Mengisi parameter
+                pstmt.setInt(1, bukuDetailsId);
+
+                // Menjalankan query
+                int rowsAffected = pstmt.executeUpdate();
+
+                // Output hasil
+                System.out.println("Rows affected: " + rowsAffected);
+            } catch (SQLException e) {
+                // Menangani error SQL
+                System.err.println("Error executing query: " + e.getMessage());
+            } finally {
+                // Pastikan koneksi ditutup jika ada metode untuk itu
+                db.disconnect();
+            }
+        } else {
+            System.err.println("Database connection not available.");
+        }
         
         
         response.sendRedirect("home");

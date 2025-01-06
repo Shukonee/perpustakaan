@@ -80,7 +80,7 @@
                 ResultSet rs = null;
                 
                 try {
-                    rs = db.getData("SELECT * FROM rakbuku_id_fk WHERE rakbuku_id_fk = " + rakId);
+                    rs = db.getData("SELECT * FROM rakbuku WHERE rakbuku_id = " + rakId);
                     if (rs.next()) {
                         String jenisRak = rs.getString("jenis_rak");
                         String lokasiRak = rs.getString("lokasi_rak");

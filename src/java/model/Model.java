@@ -27,7 +27,7 @@ public abstract class Model<E> {
             
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                con = DriverManager.getConnection( "jdbc:mysql://localhost:3306/perpus_pbo_2024","root",""); 
+                con = DriverManager.getConnection( "jdbc:mysql://localhost:3306/perpus_pbo_2024","root","admin"); 
                 stmt = con.createStatement();
                 isConnected = true;
                 message = "Database Terkoneksi";
@@ -69,27 +69,68 @@ public abstract class Model<E> {
             }
         }
 
+//        public void update() {
+//            try {
+//                connect();
+//                String values = "";
+//                Object pkValue = 0;
+//                for (Field field : this.getClass().getDeclaredFields()) {
+//                    field.setAccessible(true);
+//                    Object value = field.get(this);
+//                    if (field.getName().equals(primaryKey)) pkValue = value;
+//                    else if (value != null) {
+//                        values += field.getName() + " = '" + value + "', ";
+//                    }
+//                }
+//                int result = stmt.executeUpdate("UPDATE " + table + " SET " + values.substring(0, values.length() - 2)
+//                                                + " WHERE " + primaryKey + " = '" + pkValue +"'");
+//                message = "info update: " + result + " rows affected";
+//            } catch (IllegalAccessException | IllegalArgumentException | SecurityException | SQLException e) {
+//                message = e.getMessage();
+//            } finally {
+//                disconnect();
+//            }
+//            System.out.println("Message Update: "+message);
+//        }
         public void update() {
             try {
                 connect();
-                String values = "";
-                Object pkValue = 0;
+                StringBuilder values = new StringBuilder();
+                Object pkValue = null;
+
                 for (Field field : this.getClass().getDeclaredFields()) {
                     field.setAccessible(true);
                     Object value = field.get(this);
-                    if (field.getName().equals(primaryKey)) pkValue = value;
-                    else if (value != null) {
-                        values += field.getName() + " = '" + value + "', ";
+
+                    if (field.getName().equals(primaryKey)) {
+                        pkValue = value; // Simpan nilai primary key
+                    } else if (value != null) {
+                        // Konversi boolean atau string "true"/"false" ke integer 1/0
+                        if (value instanceof Boolean) {
+                            value = (Boolean) value ? 1 : 0;
+                        } else if (value instanceof String && (value.equals("true") || value.equals("false"))) {
+                            value = value.equals("true") ? 1 : 0;
+                        }
+
+                        // Tambahkan field dan nilai ke query
+                        values.append(field.getName()).append(" = '").append(value).append("', ");
                     }
                 }
-                int result = stmt.executeUpdate("UPDATE " + table + " SET " + values.substring(0, values.length() - 2)
-                                                + " WHERE " + primaryKey + " = '" + pkValue +"'");
+
+                // Buat query update
+                String query = "UPDATE " + table + " SET " + values.substring(0, values.length() - 2)
+                               + " WHERE " + primaryKey + " = '" + pkValue + "'";
+                System.out.println("Query Update: " + query);
+
+                // Eksekusi query
+                int result = stmt.executeUpdate(query);
                 message = "info update: " + result + " rows affected";
             } catch (IllegalAccessException | IllegalArgumentException | SecurityException | SQLException e) {
                 message = e.getMessage();
             } finally {
                 disconnect();
             }
+            System.out.println("Message Update: " + message);
         }
 
         public void delete() {
@@ -152,7 +193,6 @@ public abstract class Model<E> {
                 if (!join.equals("")) query += join;
                 if (!where.equals("")) query += " WHERE " + where;
                 if (!otherQuery.equals("")) query += " " + otherQuery;
-                System.out.println("mamak" + query);
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {
                     res.add(toModel(rs));
