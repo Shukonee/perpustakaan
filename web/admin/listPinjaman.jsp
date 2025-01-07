@@ -128,13 +128,7 @@
                                     <i class="fas <%= isExpired ? "fa-exclamation-circle" : "fa-check-circle" %> me-1"></i>
                                     <%= isExpired ? "Expired" : "Active" %>
                                 </span>
-                            </div>
-                            
-                            <div class="d-flex gap-2">
-                                <a href="booking/edit?id=<%= booking.getBooking_id() %>" class="btn btn-primary">
-                                    <i class="fas fa-edit"></i> Edit
-                                </a>
-                            </div>
+                            </div>                         
                         </div>
                     </div>
                 </div>
