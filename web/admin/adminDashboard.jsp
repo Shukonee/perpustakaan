@@ -42,9 +42,6 @@
         .btn {
             border-radius: 5px;
         }
-/*        .table th, .table td {
-            border-radius: 10px;
-        }*/
         .table-dark {
             background-color: #343a40;
         }
@@ -61,6 +58,27 @@
 </head>
 <body>
     <div class="container">
+        <% if (request.getParameter("error") != null) { %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <% if (request.getParameter("error").equals("constraint")) { %>
+                    Buku tidak dapat dihapus karena masih digunakan dalam sistem.
+                <% } else if (request.getParameter("error").equals("not_found")) { %>
+                    Buku tidak ditemukan.
+                <% } else if (request.getParameter("error").equals("db_connection")) { %>
+                    Koneksi database error.
+                <% } else if (request.getParameter("error").equals("invalid_id")) { %>
+                    ID buku tidak valid.
+                <% } %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <% } %>
+        <% if (request.getParameter("success") != null && request.getParameter("success").equals("delete")) { %>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Buku berhasil dihapus.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <% } %>
+        
         <div class="text-center mb-4">
             <h1>Admin Dashboard</h1>
             <p class="lead text-secondary">Kelola Buku dan Rak Buku Perpustakaan</p>
@@ -79,7 +97,6 @@
                 <button type="submit" class="btn btn-primary">Cari</button>
             </form>
             <a href="admin/addBook.jsp" class="btn btn-primary">Tambah Buku</a>
-            
         </div>
 
         <div class="card mb-4">
@@ -109,7 +126,7 @@
                         <td><%= buku.gettgl_terbit() %></td>
                         <td><%= buku.getAuthor() %></td>
                         <td><%= buku.getJenisRak() %></td>
-                        <td>
+                        <td class="<%= buku.getstatus_booking() ? "text-danger" : "text-success" %> fw-bold">
                             <%= buku.getstatus_booking() ? "Tidak Tersedia" : "Tersedia" %>
                         </td>
                         <td>

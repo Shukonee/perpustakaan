@@ -32,16 +32,18 @@ public class homeController extends HttpServlet {
         List<Buku> books = new ArrayList<>();
 
         try {
-            String query = "SELECT buku_id, nama_buku, tipe_buku, jenis_buku, tgl_terbit, author, status_booking, rakbuku_id_fk FROM buku";
+            String query = "SELECT * FROM buku";
             if (searchQuery != null && !searchQuery.isEmpty()) {
-                query += " WHERE nama_buku LIKE ? OR author LIKE ? OR jenis_buku LIKE ?";
+                query += " WHERE nama_buku LIKE ? OR author LIKE ? " + 
+                        "OR jenis_buku LIKE ? OR tipe_buku LIKE ?";
             }
 
             PreparedStatement pstmt = db.getConnection().prepareStatement(query);
             if (searchQuery != null && !searchQuery.isEmpty()) {
-                pstmt.setString(1, "%" + searchQuery + "%");
-                pstmt.setString(2, "%" + searchQuery + "%");
-                pstmt.setString(3, "%" + searchQuery + "%");
+                String searchParam = "%" + searchQuery + "%";
+                for(int i = 1; i <= 4; i++) {
+                    pstmt.setString(i, searchParam);
+                }
             }
 
             ResultSet rs = pstmt.executeQuery();
@@ -58,16 +60,14 @@ public class homeController extends HttpServlet {
                 );
                 books.add(book);
             }
-            rs.close();
-            pstmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             db.disconnect();
         }
 
-        // Kirim data buku ke home.jsp
         request.setAttribute("books", books);
+        request.setAttribute("searchQuery", searchQuery);
         RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
         dispatcher.forward(request, response);
     }

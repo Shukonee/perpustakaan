@@ -5,8 +5,7 @@
 --%>
 <%
     Integer sessUser = (Integer) session.getAttribute("userId");
-%>
-    
+    String role = (String) session.getAttribute("role");
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #212529;">
@@ -23,12 +22,18 @@
         <li class="nav-item">
           <a class="nav-link" href="listBooks">Daftar Buku</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="booking.jsp">Booking</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="${pageContext.request.contextPath}/profileController">Profile</a>
-        </li>
+        <% if (role != null && role.equals("admin")) { %>
+            <li class="nav-item">
+                <a class="nav-link text-warning" href="dashboard">Dashboard Admin</a>
+            </li>
+        <% } else { %>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="booking.jsp">Booking</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="${pageContext.request.contextPath}/profileController">Profile</a>
+            </li>
+        <% } %>
       </ul>
       <div class="btn-group">
         <a href="logoutController" class="btn btn-danger">Logout</a>
@@ -36,4 +41,3 @@
     </div>
   </div>
 </nav>
-
